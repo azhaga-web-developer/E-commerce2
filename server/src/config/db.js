@@ -1,14 +1,23 @@
 import mongoose from 'mongoose';
 
 export const connectDB = async () => {
-  const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/ecommerce';
+  const mongoUri = process.env.MONGO_URI;
+
+  if (!mongoUri) {
+    throw new Error('MONGO_URI is not defined');
+  }
 
   try {
     await mongoose.connect(mongoUri);
+
+    await mongoose.connection.collection('users').updateMany(
+      { isAdmin: { $exists: false } },
+      [{ $set: { isAdmin: { $eq: ['$role', 'admin'] } } }]
+    );
+
     console.log('MongoDB connected successfully');
-    return true;
   } catch (error) {
-    console.warn('MongoDB connection failed. Starting in demo mode:', error.message);
-    return false;
+    console.error('MongoDB connection failed:', error.message);
+    throw error;
   }
 };

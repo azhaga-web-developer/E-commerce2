@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
+import { useStore, productPrice } from '../context/StoreContext.jsx';
+import { apiUrl } from '../api.js';
 
-const extraProducts = [
+export const extraProducts = [
   {
     id: 'demo-shoe', name: 'AeroFlex Running Shoes', brand: 'AeroFlex', category: 'Footwear', price: 30, originalPrice: 42, rating: 4.7, reviews: 128,
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBnBg96qw81KdzsMv22sZcxx5ozqiHhtSjGkTfJkbLCgrQgZEEeW07ga1jHZCtHxe56xjyw3B1Ox42yjyBxmhQ5GqaOdxH5ckwI79cjREv6NgTqedvZRwkzq3HVKK6YZmN1Za6ERCs83QspbF6rAWa4qxCsG9z_m-qHPVNIgOupZe5g7kHbQBNP8Ag-9ObvbG_32PvoDuZuqBZ9h-lG12Ve33glK9en6ctJ2xsWHY8', description: 'Engineered for quiet utility and everyday movement.'
@@ -19,20 +21,17 @@ const extraProducts = [
   { id: 'demo-earbuds', name: 'PulsePro Smart Earbuds', brand: 'Aura', category: 'Electronics', price: 20, originalPrice: 32, rating: 4.6, reviews: 76, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDXyysjCGTeHu0lQji48gg7FkPHG2W4IgrkoXH6qFnYuihhngWVpsPVEOZPaW2oWS0jx64y7TE8ZDgPycLpIsKqM8Esi1p4IeAyNR58RBVq1zJ0yNNTDVtubkLaEbLkVIGNmqRvZWj26hNr4zEkEmU90DBrvd7xxwhTnvbeZ6QmiAP28fFh3pvQccj0q8v2qK6vHS_s8e_p7yBX6fKSXrkDm_aVbedKsKuRrkE_tcc', description: 'Compact everyday audio with a simple charging case.' }
 ];
 
-const inr = (value) => `₹${Math.round(value * 83).toLocaleString('en-IN')}`;
+const inr = (value) => `₹${Math.round(value).toLocaleString('en-IN')}`;
 
-function FilterPanel() {
+function FilterPanel({ category, setCategory, brand, setBrand, categoryOptions, brandOptions, maxPrice, setMaxPrice, minRating, setMinRating, inStock, setInStock, clear }) {
   return (
     <aside className="shop-filters">
-      <div className="filter-heading"><strong>Filters</strong><span>☷</span></div>
-      <FilterGroup title="Category"><Check label="All Products" count="156" /><Check label="Men" count="48" /><Check label="Women" count="54" /><Check label="Footwear" count="24" checked /><Check label="Electronics" count="18" /><Check label="Accessories" count="12" /></FilterGroup>
-      <FilterGroup title="Brand"><Check label="AeroFlex" /><Check label="Aura" /><Check label="Nomad" /><Check label="StudioCore" /><Check label="UrbanEdge" /></FilterGroup>
-      <FilterGroup title="Price Range"><div className="range-line"><i></i></div><div className="range-values"><span>₹ 499</span><span>₹ 5000</span></div><div className="range-chips"><span>&lt; ₹1,000</span><span>₹1K - ₹2.5K</span><span>₹2.5K - ₹5K</span><span>₹5,000+</span></div></FilterGroup>
-      <FilterGroup title="Customer Rating"><Check label="☆☆☆☆☆ & above" count="112" /><Check label="☆☆☆☆ & above" count="38" /></FilterGroup>
-      <FilterGroup title="Availability"><Check label="In Stock" count="142" checked /><Check label="Pre-order" count="14" /></FilterGroup>
-      <FilterGroup title="Color"><div className="color-dots"><i></i><i></i><i></i><i></i><i></i><i></i></div></FilterGroup>
-      <FilterGroup title="Size"><div className="size-grid">{['6', '7', '8', '9', '10', '11', '12', 'S', 'M', 'L', 'XL'].map((size) => <span className={size === '9' ? 'active' : ''} key={size}>{size}</span>)}</div></FilterGroup>
-      <button className="apply-filter" type="button">Apply Filters</button><button className="clear-filter" type="button">Clear Filters</button>
+      <div className="filter-heading"><strong>Filters</strong><button type="button" className="clear-filter" onClick={clear}>Clear all</button></div>
+      <FilterGroup title="Category"><label className="filter-check"><input type="radio" name="category" checked={!category} onChange={() => setCategory('')} /><span>All products</span></label>{categoryOptions.map((value) => <label className="filter-check" key={value}><input type="radio" name="category" checked={category.toLowerCase() === value.toLowerCase()} onChange={() => setCategory(value)} /><span>{value}</span></label>)}</FilterGroup>
+      <FilterGroup title="Brand">{brandOptions.map((value) => <label className="filter-check" key={value}><input type="radio" name="brand" checked={brand === value} onChange={() => setBrand(brand === value ? '' : value)} /><span>{value}</span></label>)}</FilterGroup>
+      <FilterGroup title="Maximum price"><input aria-label="Maximum price" type="range" min="500" max="12000" step="500" value={maxPrice} onChange={(event) => setMaxPrice(Number(event.target.value))} /><div className="range-values"><span>₹500</span><span>{inr(maxPrice)}</span></div></FilterGroup>
+      <FilterGroup title="Customer rating"><label className="filter-check"><input type="checkbox" checked={minRating >= 4} onChange={(event) => setMinRating(event.target.checked ? 4 : 0)} /><span>★★★★☆ &amp; above</span></label></FilterGroup>
+      <FilterGroup title="Availability"><label className="filter-check"><input type="checkbox" checked={inStock} onChange={(event) => setInStock(event.target.checked)} /><span>In stock</span></label></FilterGroup>
     </aside>
   );
 }
@@ -41,15 +40,12 @@ function FilterGroup({ title, children }) {
   return <section className="filter-group"><h3>{title}<span>⌃</span></h3>{children}</section>;
 }
 
-function Check({ label, count, checked = false }) {
-  return <label className="filter-check"><input type="checkbox" defaultChecked={checked} /><span>{label}</span>{count && <em>{count}</em>}</label>;
-}
-
-function ShopCard({ product, index }) {
+function ShopCard({ product, index, addToCart, toggleWishlist, isWishlisted }) {
   const discount = 20 + (index % 4) * 5;
+  const available = product.isDemo || product.stock === undefined || product.stock > 0;
   return <article className="shop-card">
-    <Link className="shop-card-image" to={`/product/${product.id}`}><img src={product.image} alt={product.name} /><span className="discount-badge">{index === 0 ? '★ BEST SELLER' : index === 2 ? 'SALE' : `${discount}% OFF`}</span><button className="heart-button" type="button" aria-label={`Save ${product.name}`} onClick={(event) => event.preventDefault()}>♡</button></Link>
-    <div className="shop-card-body"><div className="shop-card-meta"><span>{product.brand.toUpperCase()}</span><b>☆ {product.rating} ({product.reviews})</b></div><h2>{product.name}</h2><p>{product.description}</p><div className="shop-price"><strong>{inr(product.price)}</strong><del>{inr(product.originalPrice)}</del><Link className="quick-add" to={`/product/${product.id}`} aria-label={`View ${product.name}`}>＋</Link></div></div>
+    <div className="shop-card-image"><Link to={`/product/${product.id}`}><img src={product.image} alt={product.name} /></Link><span className="discount-badge">{index === 0 ? '★ BEST SELLER' : index === 2 ? 'SALE' : `${discount}% OFF`}</span><button className="heart-button" type="button" aria-label={`${isWishlisted(product) ? 'Remove' : 'Save'} ${product.name}`} onClick={() => toggleWishlist(product)}>{isWishlisted(product) ? '♥' : '♡'}</button></div>
+    <div className="shop-card-body"><div className="shop-card-meta"><span>{product.brand?.toUpperCase()}</span><b>☆ {product.rating} ({product.reviews})</b></div><h2><Link to={`/product/${product.id}`}>{product.name}</Link></h2><p>{product.description}</p><div className="shop-price"><strong>{inr(productPrice(product))}</strong>{product.originalPrice && <del>{inr(productPrice({ ...product, price: product.originalPrice }))}</del>}<button className="quick-add" type="button" disabled={!available} aria-label={`${available ? 'Add' : 'Unavailable'} ${product.name} ${available ? 'to cart' : ''}`} onClick={() => addToCart(product)}>{available ? '＋' : '×'}</button></div></div>
   </article>;
 }
 
@@ -57,21 +53,41 @@ function ShopPage() {
   const [products, setProducts] = useState([]);
   const [sort, setSort] = useState('Recommended');
   const [showFilters, setShowFilters] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [category, setCategory] = useState(searchParams.get('category') || '');
+  const [brand, setBrand] = useState('');
+  const [maxPrice, setMaxPrice] = useState(12000);
+  const [minRating, setMinRating] = useState(0);
+  const [inStock, setInStock] = useState(false);
+  const { addToCart, toggleWishlist, isWishlisted } = useStore();
 
   useEffect(() => {
-    fetch('/api/products').then((res) => res.json()).then((data) => setProducts(data.products || [])).catch(() => setProducts([]));
+    fetch(apiUrl('/api/products')).then((res) => res.json()).then((data) => setProducts((data.products || []).map((product) => ({ ...product, isDemo: Boolean(data.demo) })))).catch(() => setProducts([]));
   }, []);
+  useEffect(() => setCategory(searchParams.get('category') || ''), [searchParams]);
 
-  const catalog = useMemo(() => [...extraProducts, ...products].slice(0, 8).sort((a, b) => sort === 'Price: Low to High' ? a.price - b.price : sort === 'Price: High to Low' ? b.price - a.price : 0), [products, sort]);
+  const catalog = useMemo(() => {
+    const query = (searchParams.get('q') || '').trim().toLowerCase();
+    return [...extraProducts, ...products].map((product) => ({ ...product, id: product.id || product._id, categoryName: product.categoryName || product.category?.name || product.category })).filter((product) => {
+      const productCategory = String(product.categoryName || product.category || '').toLowerCase();
+      const targetCategory = ['men', 'women'].includes(category.toLowerCase()) ? 'apparel' : category.toLowerCase();
+      return (!category || productCategory.includes(targetCategory)) && (!brand || product.brand === brand) && productPrice(product) <= maxPrice && Number(product.rating || 0) >= minRating && (!inStock || product.stock === undefined || product.stock > 0) && (!query || `${product.name} ${product.brand} ${product.description}`.toLowerCase().includes(query));
+    }).sort((a, b) => sort === 'Price: Low to High' ? productPrice(a) - productPrice(b) : sort === 'Price: High to Low' ? productPrice(b) - productPrice(a) : 0);
+  }, [products, sort, category, brand, maxPrice, minRating, inStock, searchParams]);
+  const clearFilters = () => { setCategory(''); setBrand(''); setMaxPrice(12000); setMinRating(0); setInStock(false); setSearchParams({}); };
+  const activeFilterCount = Number(Boolean(category)) + Number(Boolean(brand)) + Number(maxPrice < 12000) + Number(Boolean(minRating)) + Number(Boolean(inStock));
+  const allProducts = [...extraProducts, ...products].map((product) => ({ ...product, isDemo: product.isDemo || String(product.id || '').startsWith('demo-'), categoryName: product.categoryName || product.category?.name || product.category }));
+  const categoryOptions = [...new Set(allProducts.map((product) => product.categoryName).filter(Boolean))].sort();
+  const brandOptions = [...new Set(allProducts.map((product) => product.brand).filter(Boolean))].sort();
 
   return <div className="shop-page">
     <div className="container shop-breadcrumb">⌂ Home&nbsp; / &nbsp;Shop</div>
-    <div className="container shop-title-row"><div><h1>Shop All Products <span>156 products</span></h1><p>Browse the full collection and find something that's right for you. Engineered for quiet utility<br className="desktop-only" /> and everyday longevity.</p></div><div className="desktop-sort">Sort by: <select value={sort} onChange={(event) => setSort(event.target.value)}><option>Recommended</option><option>Price: Low to High</option><option>Price: High to Low</option></select><button type="button" aria-label="List view">▤</button><button type="button" aria-label="Grid view">▦</button></div></div>
-    <div className="container active-filters"><span>Active:</span><b>Footwear ×</b><b>In Stock ×</b><b>Under ₹5,000 ×</b><a href="#">Clear All</a></div>
-    <div className="container mobile-shop-controls"><button type="button" onClick={() => setShowFilters(!showFilters)}>☷ Filters <b>3</b></button><label>↕ Sort: <select value={sort} onChange={(event) => setSort(event.target.value)}><option>Recommended</option><option>Price: Low to High</option><option>Price: High to Low</option></select></label><button type="button">▤</button></div>
-    <div className="container shop-layout"><div className={showFilters ? 'mobile-filter-open' : 'mobile-filter-hidden'}><FilterPanel /></div><main className="shop-results"><div className="shop-grid">{catalog.map((product, index) => <ShopCard product={product} index={index} key={product.id} />)}</div><div className="shop-pagination"><span>Showing 1–8 of 156 products</span><div><button type="button">← Previous</button><b>1</b><button type="button">2</button><button type="button">3</button><i>…</i><button type="button">20</button><button type="button">Next →</button></div></div><button className="load-more" type="button">⌄ &nbsp; Load More Products</button></main></div>
+    <div className="container shop-title-row"><div><h1>Shop All Products <span>{catalog.length} products</span></h1><p>Browse the full collection and find something that's right for you. Engineered for quiet utility<br className="desktop-only" /> and everyday longevity.</p></div><div className="desktop-sort">Sort by: <select value={sort} onChange={(event) => setSort(event.target.value)}><option>Recommended</option><option>Price: Low to High</option><option>Price: High to Low</option></select></div></div>
+    {(category || brand || maxPrice < 12000 || minRating || inStock || searchParams.get('q')) && <div className="container active-filters"><span>Active filters:</span>{category && <button onClick={() => setCategory('')}>{category} ×</button>}{brand && <button onClick={() => setBrand('')}>{brand} ×</button>}{maxPrice < 12000 && <button onClick={() => setMaxPrice(12000)}>Under {inr(maxPrice)} ×</button>}{minRating > 0 && <button onClick={() => setMinRating(0)}>4+ stars ×</button>}{inStock && <button onClick={() => setInStock(false)}>In stock ×</button>}{searchParams.get('q') && <b>Search: {searchParams.get('q')}</b>}<button type="button" onClick={clearFilters}>Clear all</button></div>}
+    <div className="container mobile-shop-controls"><button type="button" onClick={() => setShowFilters(!showFilters)}>☷ Filters <b>{activeFilterCount}</b></button><label>↕ Sort: <select value={sort} onChange={(event) => setSort(event.target.value)}><option>Recommended</option><option>Price: Low to High</option><option>Price: High to Low</option></select></label></div>
+    <div className="container shop-layout"><div className={showFilters ? 'mobile-filter-open' : 'mobile-filter-hidden'}><FilterPanel {...{ category, setCategory, brand, setBrand, categoryOptions, brandOptions, maxPrice, setMaxPrice, minRating, setMinRating, inStock, setInStock, clear: clearFilters }} /></div><main className="shop-results">{catalog.length ? <div className="shop-grid">{catalog.map((product, index) => <ShopCard product={product} index={index} addToCart={addToCart} toggleWishlist={toggleWishlist} isWishlisted={isWishlisted} key={product.id || product._id} />)}</div> : <section className="empty-state"><h2>No products match these filters</h2><p>Try changing your category, price range, or search.</p><button className="secondary-btn" onClick={clearFilters}>Clear filters</button></section>}<div className="shop-pagination"><span>Showing {catalog.length} products</span></div></main></div>
     <div className="container shop-services"><span>🚚<b>Free Shipping</b></span><span>◷<b>Easy Returns</b></span><span>♧<b>100% Genuine</b></span></div>
-    <nav className="mobile-bottom-nav"><Link to="/">⌂<span>Home</span></Link><Link to="/shop">▦<span>Categories</span></Link><Link to="/">◇<span>Offers</span></Link><Link to="/">♡<span>Wishlist</span></Link><Link to="/login">♙<span>Account</span></Link></nav>
+    <nav className="mobile-bottom-nav"><Link to="/">⌂<span>Home</span></Link><Link to="/shop">▦<span>Categories</span></Link><Link to="/shop?filter=offers">◇<span>Offers</span></Link><Link to="/wishlist">♡<span>Wishlist</span></Link><Link to="/login">♙<span>Account</span></Link></nav>
   </div>;
 }
 

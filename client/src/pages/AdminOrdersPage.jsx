@@ -1,15 +1,74 @@
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import AdminChrome from '../components/AdminChrome.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
+import { apiUrl } from '../api.js';
 
-const orderRows = [
-  ['#ORD-28491', 'Arun K.', '2 items', '₹3,798', 'Shipped', 'BlueDart Express'],
-  ['#ORD-28490', 'Priya S.', '1 item', '₹4,999', 'Processing', 'Ready to pack'],
-  ['#ORD-28489', 'Rahul M.', '1 item', '₹3,299', 'COD Pending', 'Out for delivery'],
-  ['#ORD-28488', 'Sneha P.', '3 items', '₹3,498', 'Delivered', 'Delivered'],
-  ['#ORD-28487', 'Vikram R.', '1 item', '₹2,850', 'Delivered', 'Delivered'],
-  ['#ORD-28486', 'Deepika N.', '2 items', '₹1,890', 'Delivered', 'Delivered']
-];
+const money = (value) => `₹${Math.round(Number(value) || 0).toLocaleString('en-IN')}`;
+const orderRef = (order) => `#${String(order._id).slice(-8).toUpperCase()}`;
 
 function AdminOrdersPage() {
-  return <AdminChrome active="Orders"><div className="orders-heading"><div><span className="live-badge">● FULFILLMENT HUB • Real-time Sync Active</span><h1>Orders & Shipments</h1><p>View, process, dispatch, and monitor fulfillment lifecycle across all sales channels.</p></div><div className="title-actions"><button type="button">⇩ Export CSV</button><button type="button">▣ Print Invoices</button><button className="publish-button" type="button">⊕ Create Manual Order</button></div></div><div className="order-status-tabs"><b>All Orders <small>1,248</small></b><span>Pending Payment <small>18</small></span><span>Processing / Ready <small>42</small></span><span>In Transit <small>64</small></span><span>Delivered <small>1,108</small></span><span>Cancelled / Refund <small>16</small></span></div><div className="order-filters"><input placeholder="⌕ Search by Order ID, Customer name, phone..." /><button type="button">▣ This Month (Oct 2026)⌄</button><button type="button">▣ Payment: All⌄</button><button type="button">▣ Fulfillment: All⌄</button><button type="button">☷ More Filters</button></div><div className="order-priority-mobile"><b>▣ URGENT PRIORITY</b><strong>18 ready-to-ship packages need barcode manifest scan before 4:00 PM today</strong><button type="button">▧ Batch Dispatch</button><span>3 pickup vans waiting</span></div><div className="orders-content"><section className="orders-data"><div className="priority-label">☑ &nbsp; SHOWING 6 PRIORITY DISPATCHES <span>▣ Bulk Ship &nbsp; | &nbsp; Print Labels</span></div><div className="orders-admin-table"><header><span></span><span>Order Ref</span><span>Customer</span><span>Purchased Items</span><span>Total & Payment</span><span>Fulfillment</span></header>{orderRows.map(([id, customer, item, amount, status, fulfillment]) => <article key={id}><input type="checkbox" /><b>{id}<small>12 mins ago • Web</small></b><span>{customer}<small>{customer.toLowerCase().replaceAll(' ', '.')}@example.com<br />Bengaluru, KA</small></span><span>{item}<small>AeroFlex Shoes (x1)<br />+ Nomad Oxford (x1)</small></span><strong>{amount}<small className="payment-good">● UPI • GPay</small></strong><em className={`admin-order-status ${status.toLowerCase().replace(' ', '-')}`}>● {status}</em></article>)}</div><div className="admin-list-pagination">Showing 1–6 of 1,248 orders <span>‹ &nbsp; <b>1</b> &nbsp; 2 &nbsp; 3 &nbsp; … &nbsp; 125 &nbsp; ›</span></div></section><aside className="order-detail-panel"><h2>#ORD-28491 <span>SHIPPED</span></h2><small>Placed 12 mins ago • Via Desktop Web Store</small><div className="shipment-card"><b>BlueDart Express</b><span>AWB: BLR-98214</span><i></i><small>Label Created &nbsp; In Transit &nbsp; Delivery Expected Oct 26</small></div><h3>CUSTOMER & SHIPPING ROUTE</h3><div className="customer-address"><b>AK &nbsp; Arun K.</b><span>arun.k@example.com<br />Apartment 4B, Silver Oak Heights, Bellandur, Bengaluru, KA - 560038</span></div><h3>PACKAGE INVENTORY (2 ITEMS)</h3><div className="order-mini-item"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBROTcn71PUhZ5dB-9Dy0dpyrUrtpS3TMVI6T3j3XD83sq5C_lSWU15S1zxgdqXMb2FWAT17CEGut330P53HuSqh6GX3-r-u2oRUUisKBfiWi9j5sy-KYyTNLPDRf4TJC3SwQ4UzGwdYLHX1D07F1eyK5gkMS_4r510L1oXHeidt9rfn2E059a1Yc8quDHBGUyL4_DDHIPN-UoN_oRJlnHRvcOoA6H9lkFARiJVkf4" alt="AeroFlex Ultra Shoes"/><div>AeroFlex Ultra Shoes <b>₹2,499</b><small>Size: UK 9 • Color: Obsidian Black</small></div></div><div className="order-mini-item"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjBZ5bx2CxVT0CH-i5ulU1vNQvYfRsYgedTKDd7iKus1KG_wXZ0dsuDEVqhHf5yijYmLo2DumrVcS_t3q4l2sRYw34CQgOCy45LeN13SDbeYT0ZAwyoFFFkUgiwmwlSsWOB9jiX2gIvXXC_nZiEzv2FykX2Qe0Ru2y1QjAgxIBR2vm9_7tCnukHWp6KJX2hFQ6SKcD5wJRLnGEctvoqzOy4Gxn0EC23vQBJJQ0E7Y" alt="Nomad Oxford Brogues"/><div>Nomad Oxford Brogues <b>₹1,299</b><small>Size: M • Color: Espresso</small></div></div><div className="order-total"><span>Items Subtotal <b>₹3,798</b></span><span>Shipping <b className="payment-good">FREE</b></span><strong>Total Collected <b>₹3,798</b></strong></div><button className="print-slip" type="button">▣ Print Packing Slip</button><button className="update-route" type="button">↻ Update Shipping / Re-route</button></aside></div><div className="admin-mobile-orders">{orderRows.slice(0, 4).map(([id, customer, item, amount, status, fulfillment], index) => <article key={id}><div><h2>{id} <span className={`admin-order-status ${status.toLowerCase().replace(' ', '-')}`}>● {index === 0 ? 'IN TRANSIT' : status.toUpperCase()}</span></h2><small>Oct 24, 2023 • 0{index + 1}:15 PM</small></div><strong>{amount}<small>{index === 0 ? 'UPI • GPay' : 'Card • HDFC'}</small></strong><div className="mobile-customer"><i>{customer.slice(0, 2)}</i><b>{customer}<small>Bengaluru, KA • PIN 560034</small></b></div><p>▧ &nbsp; {item} &nbsp; <small>1.4 KG PARCEL</small></p><button type="button">{index === 0 ? '▣ Print Slip' : '▣ Generate Shipping Label'}</button><button type="button">{index === 0 ? '△ Update Tracking' : '⋮'}</button></article>)}</div></AdminChrome>;
+  const { token } = useAuth();
+  const [orders, setOrders] = useState([]);
+  const [query, setQuery] = useState('');
+  const [status, setStatus] = useState('All');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [updating, setUpdating] = useState('');
+
+  const loadOrders = useCallback(async () => {
+    setLoading(true);
+    setError('');
+    try {
+      const response = await fetch(apiUrl('/api/orders/admin/all'), { headers: { Authorization: `Bearer ${token}` } });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.message || 'Could not load orders.');
+      setOrders(data.orders || []);
+    } catch (loadError) { setError(loadError.message); }
+    finally { setLoading(false); }
+  }, [token]);
+
+  useEffect(() => { loadOrders(); }, [loadOrders]);
+
+  const changeStatus = async (order, nextStatus) => {
+    setUpdating(order._id);
+    setError('');
+    try {
+      const response = await fetch(apiUrl(`/api/orders/admin/${order._id}/status`), {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ status: nextStatus })
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.message || 'Could not update the order.');
+      setOrders((current) => current.map((item) => item._id === order._id ? data.order : item));
+    } catch (updateError) { setError(updateError.message); }
+    finally { setUpdating(''); }
+  };
+
+  const visibleOrders = useMemo(() => orders.filter((order) => {
+    const customer = order.user || {};
+    const text = `${orderRef(order)} ${customer.name || ''} ${customer.email || ''} ${order.shippingAddress?.city || ''}`.toLowerCase();
+    return (status === 'All' || order.status === status) && text.includes(query.toLowerCase());
+  }), [orders, query, status]);
+  const statuses = ['All', 'Processing', 'Shipped', 'Delivered', 'Cancelled'];
+  const exportCsv = () => {
+    const rows = [['Order', 'Customer', 'Email', 'Date', 'Status', 'Payment', 'Total'], ...visibleOrders.map((order) => [orderRef(order), order.user?.name || '', order.user?.email || '', new Date(order.createdAt).toISOString(), order.status, order.paymentMethod, order.total])];
+    const csv = rows.map((row) => row.map((cell) => `"${String(cell ?? '').replaceAll('"', '""')}"`).join(',')).join('\n');
+    const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = 'orders.csv';
+    anchor.click();
+    URL.revokeObjectURL(url);
+  };
+
+  return <AdminChrome active="Orders"><div className="admin-live-orders">
+    <div className="orders-heading"><div><span className="live-badge">● LIVE ORDER RECORDS</span><h1>Orders</h1><p>Review orders placed by customers and update their fulfillment status.</p></div><div className="title-actions"><button type="button" onClick={loadOrders} disabled={loading}>↻ Refresh</button><button className="publish-button" type="button" onClick={exportCsv}>⇩ Export CSV</button></div></div>
+    {error && <p className="auth-error" role="alert">{error}</p>}
+    <div className="order-status-tabs">{statuses.map((item) => <button type="button" className={status === item ? 'active' : ''} onClick={() => setStatus(item)} key={item}>{item} <small>{item === 'All' ? orders.length : orders.filter((order) => order.status === item).length}</small></button>)}</div>
+    <div className="order-filters"><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search order, customer, email, or city…" /></div>
+    <div className="catalog-table-wrap admin-orders-live-table"><table className="catalog-table"><thead><tr><th>ORDER</th><th>CUSTOMER</th><th>ITEMS</th><th>DATE</th><th>PAYMENT</th><th>TOTAL</th><th>STATUS</th><th>UPDATE</th></tr></thead><tbody>{visibleOrders.map((order) => <tr key={order._id}><td><strong>{orderRef(order)}</strong></td><td><strong>{order.user?.name || 'Unknown customer'}</strong><small>{order.user?.email || ''}</small><small>{order.shippingAddress?.city || ''} {order.shippingAddress?.postalCode || ''}</small></td><td>{order.items?.reduce((count, item) => count + item.quantity, 0) || 0}<small>{order.items?.map((item) => item.name).join(', ')}</small></td><td>{new Date(order.createdAt).toLocaleDateString('en-IN')}<small>{new Date(order.createdAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}</small></td><td>{String(order.paymentMethod || 'cod').toUpperCase()}</td><td><strong>{money(order.total)}</strong></td><td><span className={`admin-order-status ${String(order.status).toLowerCase()}`}>● {order.status}</span></td><td><select aria-label={`Update status for ${orderRef(order)}`} value={order.status} disabled={updating === order._id} onChange={(event) => changeStatus(order, event.target.value)}>{['Processing', 'Shipped', 'Delivered', 'Cancelled'].map((value) => <option key={value}>{value}</option>)}</select></td></tr>)}</tbody></table>{loading && <div className="catalog-empty">Loading orders…</div>}{!loading && visibleOrders.length === 0 && <div className="catalog-empty">{orders.length ? 'No orders match your search.' : 'There are no orders yet.'}</div>}<div className="catalog-pagination">Showing {visibleOrders.length} of {orders.length} orders</div></div>
+  </div></AdminChrome>;
 }
+
 export default AdminOrdersPage;

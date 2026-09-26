@@ -5,22 +5,41 @@ import productRoutes from './routes/productRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
+import reviewRoutes from './routes/reviewRoutes.js';
+import mongoose from 'mongoose';
 
 dotenv.config();
 
 const app = express();
 
-app.use(cors({ origin: process.env.CLIENT_URL || true }));
-app.use(express.json());
+const allowedOrigins = (process.env.CLIENT_URL || (process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5173'))
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+app.use(cors({
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(Object.assign(new Error('Origin is not allowed by CORS'), { statusCode: 403 }));
+  }
+}));
+app.use(express.json({ limit: '8mb' }));
 
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'E-commerce API is running' });
+  const databaseReady = mongoose.connection.readyState === 1;
+  return res.status(databaseReady ? 200 : 503).json({
+    status: databaseReady ? 'ok' : 'unavailable',
+    database: databaseReady ? 'connected' : 'disconnected'
+  });
 });
 
 app.use('/api/products', productRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' });

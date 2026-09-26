@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate, Link } from 'react-router-dom';
 import HomePage from './pages/HomePage.jsx';
 import ProductPage from './pages/ProductPage.jsx';
 import CartPage from './pages/CartPage.jsx';
@@ -16,7 +16,15 @@ import AdminOrdersPage from './pages/AdminOrdersPage.jsx';
 import AdminCategoriesPage from './pages/AdminCategoriesPage.jsx';
 import AdminInventoryPage from './pages/AdminInventoryPage.jsx';
 import AdminCustomersPage from './pages/AdminCustomersPage.jsx';
-import { AuthProvider } from './context/AuthContext.jsx';
+import { AuthProvider, useAuth } from './context/AuthContext.jsx';
+import WishlistPage from './pages/WishlistPage.jsx';
+import { StoreProvider } from './context/StoreContext.jsx';
+
+function AdminOnly({ children }) {
+  const { user } = useAuth();
+  const isAdmin = user?.isAdmin === true || user?.role === 'admin';
+  return isAdmin ? children : <Navigate to="/login" replace state={{ from: '/admin' }} />;
+}
 
 function App() {
   const { pathname } = useLocation();
@@ -24,6 +32,7 @@ function App() {
 
   return (
     <AuthProvider>
+     <StoreProvider>
       <div className={`app-shell ${isAdmin ? '' : 'storefront bg-surface text-on-surface antialiased'}`}>
         {!isAdmin && <Navbar />}
 
@@ -34,21 +43,24 @@ function App() {
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/admin/products" element={<AdminProductsPage />} />
-          <Route path="/admin/add-product" element={<AdminAddProductPage />} />
-          <Route path="/admin/orders" element={<AdminOrdersPage />} />
-          <Route path="/admin/categories" element={<AdminCategoriesPage />} />
-          <Route path="/admin/inventory" element={<AdminInventoryPage />} />
-          <Route path="/admin/customers" element={<AdminCustomersPage />} />
+          <Route path="/admin" element={<AdminOnly><AdminPage /></AdminOnly>} />
+          <Route path="/admin/products" element={<AdminOnly><AdminProductsPage /></AdminOnly>} />
+          <Route path="/admin/add-product" element={<AdminOnly><AdminAddProductPage /></AdminOnly>} />
+          <Route path="/admin/orders" element={<AdminOnly><AdminOrdersPage /></AdminOnly>} />
+          <Route path="/admin/categories" element={<AdminOnly><AdminCategoriesPage /></AdminOnly>} />
+          <Route path="/admin/inventory" element={<AdminOnly><AdminInventoryPage /></AdminOnly>} />
+          <Route path="/admin/customers" element={<AdminOnly><AdminCustomersPage /></AdminOnly>} />
+          <Route path="*" element={<section className="container page-header"><h1>Page not found</h1><p>The page you requested does not exist.</p><Link className="primary-btn" to="/">Return home</Link></section>} />
         </Routes>
       </main>
 
         {!isAdmin && <Footer />}
       </div>
+     </StoreProvider>
     </AuthProvider>
   );
 }

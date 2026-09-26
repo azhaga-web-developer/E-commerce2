@@ -1,6 +1,9 @@
-node_modules
+node_modules/
 .env
-server/.env
-client/dist
+.env.*
+!.env.example
+client/dist/
+dist/
+coverage/
 npm-debug.log*
 .DS_Store

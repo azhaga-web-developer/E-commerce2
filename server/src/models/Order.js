@@ -18,6 +18,7 @@ const orderSchema = new mongoose.Schema({
     address: { type: String, required: true },
     city: { type: String, required: true },
     postalCode: { type: String, required: true },
+    phone: { type: String, trim: true },
     country: { type: String, default: 'India' }
   },
   paymentMethod: { type: String, enum: ['cod', 'card', 'upi'], default: 'cod' },

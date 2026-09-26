@@ -1,29 +1,75 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext.jsx';
+import { productPrice, useStore } from '../context/StoreContext.jsx';
+import { apiUrl } from '../api.js';
 
-const items = [
-  { name: 'AeroFlex Running Shoes', detail: 'Midnight Navy • Size 9', price: '₹2,499', oldPrice: '₹3,499', tag: 'NEW', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAryUTYl_mgs3aoa6RcFx4Cz7YVas2LgTNJQ-8DCW3ffDz_mGAu5zk9ffFO8Es9rl5UgVsTGNoKZgSbEpZF5QXWieC2pjbzGzve9LXporDpJhNC9lyRx5Mo6n8y4HrgQz3UPW5PRhnzr_PVPNaV2M_5p8B5m1_VIAgOpZxeTfM4fk1Xa_EbTILxBdcHQGxCkbB39og7ZmRbAHz_wUkGQ2P23e0znom-LSXkAUvly9w' },
-  { name: 'Nomad Crisp Oxford Shirt', detail: 'Sky Blue • Size M', price: '₹1,799', oldPrice: '₹2,499', tag: 'CLASSIC', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDfNnu_dYzByxvVxIgEVrw9hqk1NqiY_D88ssPcTUkAjwtZmKVXDvwTHf95wBAhh_g5QtjEXU17DdR_U6RRg_jxmR44bKgF2HblcvEVtcvh7y4vQowWdhSf8oWDhp8RJKoSixVpFNnmGUp6jN4ZFiKkRZ60k033BZDLrGRPVcZ-iR9crQJ4WFOZKFguQ7gV4m9JgFOPA7i_taiFO7oFX7i_GYLeAGFVpuzoUVG4nHE' }
-];
+const money = (amount) => `₹${Math.round(amount).toLocaleString('en-IN')}`;
 
 function CheckoutPage() {
-  const [quantities, setQuantities] = useState([1, 1]);
-  const [payment, setPayment] = useState('UPI');
-  const [delivery, setDelivery] = useState('Standard Delivery');
-  const changeQuantity = (index, change) => setQuantities((current) => current.map((value, i) => i === index ? Math.max(1, value + change) : value));
+  const navigate = useNavigate();
+  const { token } = useAuth();
+  const { cart, cartTotal, setQuantity, removeFromCart, clearCart } = useStore();
+  const paymentMethod = 'cod';
+  const [error, setError] = useState('');
+  const [order, setOrder] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+  const previewOrder = cart.some(({ product }) => product.isDemo || String(product.id).startsWith('demo-'));
+
+  const placeOrder = async (event) => {
+    event.preventDefault();
+    setError('');
+    if (!cart.length) return setError('Your cart is empty. Add a product before checking out.');
+    if (!token) return navigate('/login', { state: { from: '/checkout' } });
+    setSubmitting(true);
+    try {
+      if (previewOrder && import.meta.env.PROD) throw new Error('Preview products cannot be ordered. Please choose an available product from the live catalog.');
+      if (previewOrder) {
+        const preview = `PREVIEW-${Date.now().toString().slice(-6)}`;
+        clearCart();
+        setOrder({ id: preview, preview: true });
+        return;
+      }
+      const form = new FormData(event.currentTarget);
+      const shippingAddress = {
+        fullName: form.get('fullName'),
+        address: form.get('address'),
+        city: form.get('city'),
+        postalCode: form.get('postalCode'),
+        phone: form.get('phone')
+      };
+      const response = await fetch(apiUrl('/api/orders'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({
+          items: cart.map(({ product, quantity, size, color }) => ({ product: product.id, quantity, size, color })),
+          shippingAddress,
+          paymentMethod
+        })
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.message || 'We could not place your order. Please try again.');
+      setOrder(data.order);
+      clearCart();
+    } catch (submitError) {
+      setError(submitError.message);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (order) return <div className="container page-header order-success"><div className="success-mark">✓</div><h1>Order received</h1><p>{order.preview ? 'Your preview order is complete. Preview products are saved in this browser only.' : 'Your order has been placed successfully.'}</p><p>Order reference: <strong>{order._id || order.id}</strong></p><Link className="primary-btn" to="/shop">Continue shopping</Link></div>;
 
   return <div className="checkout-page">
-    <div className="container checkout-topline"><div className="checkout-heading"><span className="eyebrow">● FAST CHECKOUT</span><h1>Your Cart &amp; Checkout</h1><p>Here's everything you've added. Take a quick look before checking out.</p></div><nav className="checkout-steps"><span className="current">1 <b>Cart</b></span><i></i><span>2 <b>Address</b></span><i></i><span>3 <b>Delivery</b></span><i></i><span>4 <b>Payment</b></span></nav></div>
-    <div className="container checkout-layout">
+    <div className="container checkout-topline"><div className="checkout-heading"><span className="eyebrow">SECURE CHECKOUT</span><h1>Delivery and payment</h1><p>Review your items and enter a delivery address.</p></div><nav className="checkout-steps"><span className="current">1 <b>Cart</b></span><i></i><span className="current">2 <b>Address</b></span><i></i><span>3 <b>Payment</b></span></nav></div>
+    {!cart.length ? <div className="container empty-state"><h2>Your cart is empty</h2><p>Add a product before continuing to checkout.</p><Link className="primary-btn" to="/shop">Browse products</Link></div> : <form onSubmit={placeOrder} className="container checkout-layout">
       <main className="checkout-main">
-        <section className="checkout-section cart-section"><div className="section-label"><h2>▣ &nbsp;Items in Cart ({quantities.reduce((sum, quantity) => sum + quantity, 0)})</h2><a>STANDARD DELIVERY APPLIES</a></div>{items.map((item, index) => <article className="checkout-item" key={item.name}><div className="checkout-thumb"><img src={item.image} alt={item.name} /><span>{item.tag}</span></div><div className="checkout-item-details"><b>{item.name}</b><span>{item.detail}</span><small>● In Stock</small><strong>{item.price} <del>{item.oldPrice}</del> <em>28% OFF</em></strong><div className="item-links"><button type="button">♧ Save</button><button type="button">▧ Remove</button></div></div><div className="item-quantity"><button type="button" onClick={() => changeQuantity(index, -1)} aria-label="Decrease quantity">−</button><span>{quantities[index]}</span><button type="button" onClick={() => changeQuantity(index, 1)} aria-label="Increase quantity">＋</button></div></article>)}</section>
-        <section className="checkout-section address-section"><div className="section-label"><h2><i>1</i> Delivery Address</h2><span>✓</span></div><p className="step-subtitle">Where should we deliver your order?</p><div className="address-card"><b>◉ &nbsp;Arun K. <small>DEFAULT</small> <em>HOME</em></b><a href="#address">Edit</a><p>Flat 402, Green Glen Heights, Bellandur, Bengaluru • 560103</p><span>Mobile: +91 98765 43210</span></div><button className="add-address" type="button">⊕ &nbsp; Add New Address</button></section>
-        <section className="checkout-section delivery-section"><div className="section-label"><h2><i>2</i> Choose Delivery Speed</h2><span>♧</span></div><p className="step-subtitle">Select preferred shipping timeline</p><div className="delivery-options"><label className={`radio-option ${delivery === 'Standard Delivery' ? 'active' : ''}`}><input type="radio" checked={delivery === 'Standard Delivery'} onChange={() => setDelivery('Standard Delivery')} name="delivery" /><span><b>Standard Delivery <small>FREE</small></b><em>◷ &nbsp;Arrives in 3–5 business days</em></span></label><label className={`radio-option ${delivery === 'Express Delivery' ? 'active' : ''}`}><input type="radio" checked={delivery === 'Express Delivery'} onChange={() => setDelivery('Express Delivery')} name="delivery" /><span><b>Express Delivery <small>₹99</small></b><em>ϟ &nbsp;Arrives in 1–2 business days</em></span></label></div></section>
-        <section className="checkout-section payment-section"><div className="section-label"><h2><i>3</i> How would you like to pay?</h2><span>♙</span></div><p className="step-subtitle">All transactions are encrypted and secured</p><label className={`radio-option ${payment === 'UPI' ? 'active' : ''}`}><input type="radio" checked={payment === 'UPI'} onChange={() => setPayment('UPI')} name="payment" /><span><b>UPI <small>RECOMMENDED</small></b><em>Pay using Google Pay, PhonePe, Paytm or UPI ID</em></span><strong>GPay &nbsp; PhonePe &nbsp; Paytm</strong></label>{payment === 'UPI' && <div className="upi-panel"><div className="qr-placeholder" aria-label="QR code">▦<small>Scan with any UPI App</small></div><label>Or enter your UPI ID<div><input defaultValue="arun.k@okaxis" /><button type="button">Verify</button></div><small>◉ Verified: Arun Kumar (Axis Bank)</small></label></div>}{[['Credit / Debit Card', 'Visa, Mastercard, RuPay, Amex'], ['Net Banking', 'HDFC, ICICI, SBI, Axis & 40+ banks'], ['Cash on Delivery', 'Pay with cash or UPI scanner upon delivery']].map(([name, copy]) => <label className={`radio-option compact ${payment === name ? 'active' : ''}`} key={name}><input type="radio" checked={payment === name} onChange={() => setPayment(name)} name="payment" /><span><b>{name}</b><em>{copy}</em></span><strong>{name === 'Net Banking' ? '▤' : name === 'Cash on Delivery' ? '▣' : '▭'}</strong></label>)}</section>
+        <section className="checkout-section cart-section"><div className="section-label"><h2>Items in cart ({cart.reduce((sum, item) => sum + item.quantity, 0)})</h2><Link to="/cart">Edit cart</Link></div>{cart.map(({ key, product, quantity, size, color }) => <article className="checkout-item" key={key}><div className="checkout-thumb"><img src={product.image} alt={product.name} /></div><div className="checkout-item-details"><b>{product.name}</b><span>{[color, size && `Size ${size}`].filter(Boolean).join(' • ')}</span><strong>{money(productPrice(product))}</strong></div><div className="item-quantity"><button type="button" aria-label="Decrease quantity" onClick={() => setQuantity(key, quantity - 1)}>−</button><span>{quantity}</span><button type="button" aria-label="Increase quantity" onClick={() => setQuantity(key, quantity + 1)}>＋</button></div><button type="button" onClick={() => removeFromCart(key)} aria-label={`Remove ${product.name}`}>Remove</button></article>)}</section>
+        <section className="checkout-section address-section"><div className="section-label"><h2><i>1</i> Delivery address</h2></div><p className="step-subtitle">Where should we deliver your order?</p><div className="checkout-address-form"><label>Full name<input name="fullName" autoComplete="name" required /></label><label>Phone number<input name="phone" type="tel" autoComplete="tel" required /></label><label className="address-wide">Street address<input name="address" autoComplete="street-address" required /></label><label>City<input name="city" autoComplete="address-level2" required /></label><label>Postal code<input name="postalCode" autoComplete="postal-code" required /></label></div></section>
+        <section className="checkout-section payment-section"><div className="section-label"><h2><i>2</i> Payment method</h2></div><label className="radio-option active"><input type="radio" name="paymentMethod" checked readOnly /><span><b>Cash on delivery</b><em>Pay when your order arrives</em></span></label><p className="step-subtitle">Online payment is not enabled yet.</p></section>
       </main>
-      <aside className="checkout-side"><section className="coupon-card"><h2>♧ &nbsp;Have a coupon?</h2><div><b>◇ &nbsp;SAVE500</b><span>✓ Applied</span></div><small>✓ Coupon applied! You saved ₹500 on this order.</small></section><section className="checkout-summary"><h2>Order Summary <small>2 items</small></h2><div><span>Subtotal</span><b>₹4,998</b></div><div><span>Product Discount</span><b className="negative">−₹700</b></div><div><span>Coupon Savings</span><b className="negative">−₹500</b></div><div><span>Delivery Fee</span><b><del>₹99</del> <strong>FREE</strong></b></div><hr /><div className="total"><span>Total Amount<small>Includes all taxes &amp; duties</small></span><b>₹3,798</b></div><p className="saving-note">🎉 You are saving a total of ₹1,200 on this order</p><button className="place-order" type="button">♙ &nbsp; Place Order (₹3,798) &nbsp; →</button><Link className="continue-shopping" to="/shop">← Continue Shopping</Link><ul className="checkout-assurances"><li>♢ &nbsp;256-Bit SSL Encrypted &amp; Secure Checkout</li><li>◷ &nbsp;7-Day Easy Replacement or Full Refund</li><li>♧ &nbsp;100% Genuine &amp; Direct from Authorized Brands</li></ul></section><section className="order-timeline"><h2>Estimated Journey <small>ON SCHEDULE</small></h2><div><span className="done">●<b>Ordered</b><small>Today</small></span><i></i><span className="packed">▣<b>Packed</b><small>Tomorrow</small></span><i></i><span>▣<b>Shipped</b><small>Oct 24</small></span><i></i><span>♧<b>Delivered</b><small>Oct 26</small></span></div></section></aside>
-    </div>
-    <nav className="mobile-bottom-nav"><Link to="/">⌂<span>Home</span></Link><Link to="/shop">▦<span>Categories</span></Link><Link to="/shop">◇<span>Offers</span></Link><Link to="/shop">♡<span>Wishlist</span></Link><Link to="/login">♙<span>Account</span></Link></nav>
+      <aside className="checkout-side"><section className="checkout-summary"><h2>Order summary <small>{cart.length} products</small></h2><div><span>Subtotal</span><b>{money(cartTotal)}</b></div><div><span>Shipping</span><b>{cartTotal >= 999 ? 'Free' : money(79)}</b></div><hr /><div className="total"><span>Total<small>Includes shipping and taxes</small></span><b>{money(cartTotal + (cartTotal >= 999 ? 0 : 79))}</b></div>{error && <p className="auth-error" role="alert">{error}</p>}<button className="place-order" type="submit" disabled={submitting}>{submitting ? 'Placing order…' : 'Place order →'}</button><Link className="continue-shopping" to="/cart">← Back to cart</Link><ul className="checkout-assurances"><li>Secure checkout</li><li>Easy returns</li></ul></section></aside>
+    </form>}
   </div>;
 }
 

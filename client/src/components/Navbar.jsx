@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import Icon from './Icon.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
+import { useStore } from '../context/StoreContext.jsx';
 
 const mainLinks = [
   { to: '/', label: 'Home', end: true },
@@ -22,6 +23,7 @@ const categoryLinks = [
 function Navbar() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+  const { cartCount, cartTotal, wishlist } = useStore();
   const [query, setQuery] = useState('');
   const [mobileSearch, setMobileSearch] = useState(false);
 
@@ -106,18 +108,18 @@ function Navbar() {
               >
                 <Icon name="search" />
               </button>
-              <Link to="/shop" className="relative p-2 text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center" aria-label="Wishlist">
+              <Link to="/wishlist" className="relative p-2 text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center" aria-label="Wishlist">
                 <Icon name="favorite" className="text-[24px]" />
-                <span className="absolute -top-0.5 -right-0.5 bg-secondary text-on-secondary text-label-badge w-4 h-4 rounded-full flex items-center justify-center">3</span>
+                {wishlist.length > 0 && <span className="absolute -top-0.5 -right-0.5 bg-secondary text-on-secondary text-label-badge w-4 h-4 rounded-full flex items-center justify-center">{wishlist.length}</span>}
               </Link>
               <Link to="/cart" className="flex items-center gap-space-xs p-1.5 pl-2.5 rounded-full hover:bg-surface-container transition-colors group">
                 <div className="relative">
                   <Icon name="shopping_bag" className="text-[24px] text-on-surface-variant group-hover:text-on-surface" />
-                  <span className="absolute -top-1 -right-1 bg-secondary text-on-secondary text-label-badge w-4 h-4 rounded-full flex items-center justify-center">2</span>
+                  {cartCount > 0 && <span className="absolute -top-1 -right-1 bg-secondary text-on-secondary text-label-badge w-4 h-4 rounded-full flex items-center justify-center">{cartCount}</span>}
                 </div>
                 <div className="hidden sm:flex flex-col text-left pr-1.5">
                   <span className="text-label-badge text-outline">Cart</span>
-                  <span className="text-label-md text-on-surface">₹4,498</span>
+                  <span className="text-label-md text-on-surface">₹{Math.round(cartTotal).toLocaleString('en-IN')}</span>
                 </div>
               </Link>
               <div className="h-6 w-px bg-surface-container-high hidden sm:block" />

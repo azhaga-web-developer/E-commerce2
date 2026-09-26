@@ -1,8 +1,100 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import AdminChrome from '../components/AdminChrome.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
+import { apiUrl } from '../api.js';
 
 function AdminAddProductPage() {
-  return <AdminChrome active="Add Product"><div className="editor-heading"><div><span className="admin-breadcrumb">Products &nbsp;›&nbsp; Add New Product</span><h1>Add New Product <small>DRAFT MODE</small></h1><p>Configure product details, variants, inventory, and multimedia assets.</p></div><div className="title-actions"><button type="button">Discard</button><button type="button">▣ Save as Draft</button><button className="publish-button" type="button">☁ Publish Product</button></div></div><div className="editor-tabs"><b>1 &nbsp; Basic Information</b><span>2 &nbsp; Media</span><span>3 &nbsp; Pricing</span><span>4 &nbsp; Inventory</span></div><div className="editor-layout"><main><EditorSection title="☷ Basic Information" hint="REQUIRED FIELDS"><label>Product Title<input defaultValue="AeroFlex Pro Velocity Running Shoes" /></label><label>Short Summary<input defaultValue="Ultra-breathable micro-mesh engineered marathon running sneaker with high-rebound cushioning" /></label><label>Full Product Description<div className="rich-editor"><b>B</b><i>I</i><u>U</u><span>☷ &nbsp; ☰ &nbsp; T &nbsp; ⛓ &nbsp; ▧</span><p>Experience peak road response with the AeroFlex Pro Velocity. Engineered using a biomechanically balanced dual-foam midsole and seamless matrix upper.<br />• Dynamic response nitrogen-infused foam for 78% energy return.<br />• Breathable 3D jacquard upper ensures continuous heat dissipation.<br />• Carbon-reinforced midfoot torsion plate for race-ready cornering stability.</p></div></label></EditorSection><EditorSection title="▣ Media & Product Gallery" hint="4 of 8 Images"><div className="upload-box">☁<b>Drag and drop product images, or <a href="#browse">browse files</a></b><small>Upload clear, high-quality images. Recommended 1200×1200px (1:1 aspect ratio). First image will be used as the primary cover.</small></div><div className="editor-images"><figure><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAu60vBYbjTxFfH0zbH5OLenG4h-zlslj-yC4KXQNnBDz6y8MdoEUgObujN-rFfIwd3xUc043pYmzMUslvMVmUqEHYvmZ0CkiS7aIxc2Quj_Rhu_9-955SGr73RMDEFxWY2MUdxjXfEkD9nU0S8b9zvOzP6WX4n5qRY4qNbPLW2ocrBz5kCQ6vGY_ZrdOcKJgdK7v9NRRDfezlODKjh_pKGlPki63Q1eMLYxep3GGc" alt="Navy blue running shoe" /><em>COVER</em></figure><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNxOekVhgHvsC4hwl0mE0c-FXqOQGCAWF-EjSmHtdsexqRRAFU_9ex8Gmy18uP9oWOs65dBSbseiuR9TNlLU6ZC71yKAnn-dNYvMOiUXkN9N10CzmuxCa7A1IxrUlfqBrMN7ccyFOYCOG9-4ex041dkZZPeYfxYTcpOX0f6CgvsQuUt1qOhq1z0_sWtU97H4X_OFJLGATrP1f9lc3fNONNiu4onu9zcjWGo6X3q_Q" alt="Mesh upper detail" /><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgVIVPw7X4aOzmNtrcg1CU2UMA4r_7F2xq3wOis2nVn8ouvczqV5sORPviiQZKoL-p1kogGFN7kb-jQzfCM868d3jzOhhax8tMel9oQ9Ra3tK6XSTH7zmSOjRbgAOv5J7iDchaGd0nZEn9F-yD7lCs8ZMTzC9hpZtRkKlYifb0UZgb-NBZp1h2dKOTzQIzaJYZwjsNm8aVfNvXbbNnaM44EUYEqljeZhflg6TYU6M" alt="Grip sole and carbon shank" /><button type="button">＋<br />Add More</button></div></EditorSection><EditorSection title="▣ Pricing & Tax Evaluation" hint="↗ 52% Margin Projected"><div className="editor-three-fields"><label>Regular Retail Price<input defaultValue="₹ 3,499" /></label><label>Sale Price (Discounted)<input className="blue-text" defaultValue="₹ 2,499" /></label><label>Cost Per Item<input defaultValue="₹ 1,200" /></label></div><div className="tax-row"><input type="checkbox" defaultChecked /> <b>Charge tax on this product</b><small>18% GST applicable for sports footwear in domestic commerce</small><span>HSN 640411</span></div></EditorSection><EditorSection title="▣ Inventory & Warehouse" hint="Hub: Central Mumbai DC"><div className="editor-two-fields"><label>SKU (Stock Keeping Unit)<input defaultValue="AF-RUN-09" /></label><label>Barcode (ISBN/GTIN)<input defaultValue="8901234567890" /></label></div><div className="tax-row"><input type="checkbox" defaultChecked /> <b>Track Realtime Quantity</b><small>Prevent overselling when stock drops below threshold</small></div><div className="editor-two-fields"><label>Quantity Available<input defaultValue="24" /></label><label>Low Stock Alert Threshold<input defaultValue="5" /></label></div></EditorSection><EditorSection title="⚯ Variants & Options" hint="Has Multiple Variants"><div className="variant-box"><b>Option 1: Color</b><span>+ Add Color</span><p>● Deep Navy × &nbsp; ◯ Pure White × &nbsp; ● Carbon Black ×</p></div><div className="variant-box"><b>Option 2: UK/India Shoe Size</b><span>+ Add Size</span><p>UK 7 × &nbsp; UK 8 × &nbsp; UK 9 × &nbsp; UK 10 × &nbsp; UK 11 ×</p></div><div className="variant-table">Generated Variant Combinations (15 SKUs)<span>Showing active 4</span><p>● Navy / UK 8 &nbsp;&nbsp; AF-RUN-09-NV-8 &nbsp; ₹2,499 &nbsp; <b>8 in stock</b></p><p>● Navy / UK 9 &nbsp;&nbsp; AF-RUN-09-NV-9 &nbsp; ₹2,499 &nbsp; <b>10 in stock</b></p><p>● White / UK 9 &nbsp;&nbsp; AF-RUN-09-WH-9 &nbsp; ₹2,499 &nbsp; <b>2 left</b></p></div></EditorSection></main><aside className="editor-side"><EditorSection title="♧ Publishing"><label>Product Status<select><option>Published</option><option>Draft</option><option>Scheduled</option></select></label><p>Channels Visibility: Online Store, App, POS</p><p className="publish-schedule">Publish Schedule <b>Immediate</b></p></EditorSection><EditorSection title="♧ Organization"><label>Product Category<select><option>Footwear › Running Shoes</option></select></label><label>Brand / Vendor<select><option>AeroFlex Performance</option></select></label><label>Collections<input defaultValue="Featured Picks ×  New Arrivals ×  Best Sellers ×" /></label><a className="editor-add-link" href="#collections">+ Assign more collections</a><label>Search Tags<input defaultValue="running, breathable, lightweight" /></label><small className="editor-help">Separate keywords using commas</small></EditorSection><EditorSection title="▣ Shipping & Logistics"><div className="tax-row"><input type="checkbox" defaultChecked /> <b>Physical Product</b><small>Requires domestic or overseas courier shipping</small></div><label>Gross Weight (kg)<input defaultValue="0.65" /></label><label>Package Dimensions (L × W × H cm)<div className="dimensions"><input defaultValue="32" /><input defaultValue="20" /><input defaultValue="12" /></div></label><div className="shipping-note">✧ &nbsp;Standard Express Eligible<small>Automated surface dispatch with BlueDart &amp; Delhivery</small></div></EditorSection></aside></div></AdminChrome>;
+  const { token } = useAuth();
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
+  const [saving, setSaving] = useState(false);
+  const [uploadedImage, setUploadedImage] = useState('');
+  const [imageError, setImageError] = useState('');
+
+  const chooseImage = (event) => {
+    const file = event.target.files?.[0];
+    setImageError('');
+    if (!file) return;
+    if (!file.type.startsWith('image/')) { setImageError('Choose an image file.'); return; }
+    if (file.size > 12 * 1024 * 1024) { setImageError('Choose an image smaller than 12 MB.'); return; }
+    const reader = new FileReader();
+    reader.onerror = () => setImageError('This image could not be read. Please choose another file.');
+    reader.onload = () => {
+      const image = new Image();
+      image.onerror = () => setImageError('This image could not be opened. Please choose another file.');
+      image.onload = () => {
+        const scale = Math.min(1, 1400 / Math.max(image.width, image.height));
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.max(1, Math.round(image.width * scale));
+        canvas.height = Math.max(1, Math.round(image.height * scale));
+        const context = canvas.getContext('2d');
+        context.fillStyle = '#ffffff';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        const data = canvas.toDataURL('image/jpeg', 0.82);
+        if (data.length > 7_500_000) { setImageError('This image is still too large after compression. Choose a smaller image.'); return; }
+        setUploadedImage(data);
+      };
+      image.src = String(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const submit = async (event) => {
+    event.preventDefault();
+    setError('');
+    setSaving(true);
+    const form = new FormData(event.currentTarget);
+    const product = {
+      name: form.get('name').trim(),
+      brand: form.get('brand').trim(),
+      categoryName: form.get('categoryName').trim(),
+      description: form.get('description').trim(),
+      image: uploadedImage || form.get('image').trim(),
+      price: Number(form.get('price')),
+      originalPrice: form.get('originalPrice') ? Number(form.get('originalPrice')) : undefined,
+      stock: Number(form.get('stock')),
+      colors: form.get('colors').split(',').map((value) => value.trim()).filter(Boolean),
+      sizes: form.get('sizes').split(',').map((value) => value.trim()).filter(Boolean),
+      isActive: true
+    };
+    if (!product.image) {
+      setError('Upload a product image or enter an image URL.');
+      setSaving(false);
+      return;
+    }
+    try {
+      const response = await fetch(apiUrl('/api/products'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify(product)
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.message || 'Could not save this product. Check the required fields and try again.');
+      navigate('/admin/products', { replace: true, state: { message: 'Product added to the catalog.' } });
+    } catch (saveError) {
+      setError(saveError.message);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return <AdminChrome active="Add Product"><form onSubmit={submit}>
+    <div className="editor-heading"><div><span className="admin-breadcrumb">Products &nbsp;›&nbsp; Add New Product</span><h1>Add New Product</h1><p>Enter the product details that customers will see in the shop.</p></div><div className="title-actions"><Link to="/admin/products">Cancel</Link><button className="publish-button" type="submit" disabled={saving}>{saving ? 'Saving…' : 'Add Product'}</button></div></div>
+    <div className="editor-layout editor-layout-single"><main>
+      <EditorSection title="Basic information" hint="REQUIRED"><label>Product title<input name="name" placeholder="Example: Everyday Running Shoes" minLength="2" required /></label><div className="editor-two-fields"><label>Brand<input name="brand" placeholder="Brand name" required /></label><label>Category<input name="categoryName" placeholder="Footwear, Apparel, Electronics…" required /></label></div><label>Product description<textarea name="description" rows="5" placeholder="Describe the product" required /></label></EditorSection>
+      <EditorSection title="Product image"><label>Upload from your computer<input type="file" accept="image/*" onChange={chooseImage} /></label><small>Choose an image up to 12 MB. It will be resized and compressed before saving.</small>{uploadedImage && <img className="product-upload-preview" src={uploadedImage} alt="Selected product preview" />}<label>Or use an image URL<input name="image" type="url" placeholder="https://example.com/product-image.jpg" /></label>{imageError && <p className="auth-error" role="alert">{imageError}</p>}</EditorSection>
+      <EditorSection title="Price and inventory"><div className="editor-three-fields"><label>Price (₹)<input name="price" type="number" min="0" step="0.01" required /></label><label>Original price (₹)<input name="originalPrice" type="number" min="0" step="0.01" /></label><label>Quantity in stock<input name="stock" type="number" min="0" step="1" defaultValue="0" required /></label></div></EditorSection>
+      <EditorSection title="Options"><label>Colors<input name="colors" placeholder="Black, White, Navy" /></label><label>Sizes<input name="sizes" placeholder="S, M, L, XL" /></label></EditorSection>
+      {error && <p className="auth-error" role="alert">{error}</p>}
+      <div className="title-actions"><Link to="/admin/products">Cancel</Link><button className="publish-button" type="submit" disabled={saving}>{saving ? 'Saving…' : 'Add Product'}</button></div>
+    </main></div>
+  </form></AdminChrome>;
 }
-function EditorSection({ title, hint, children }) { return <section className="editor-section"><header><h2>{title}</h2>{hint && <span>{hint}</span>}</header>{children}</section>; }
+
+function EditorSection({ title, hint, children }) {
+  return <section className="editor-section"><header><h2>{title}</h2>{hint && <span>{hint}</span>}</header>{children}</section>;
+}
+
 export default AdminAddProductPage;

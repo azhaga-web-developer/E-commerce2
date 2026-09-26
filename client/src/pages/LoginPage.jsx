@@ -16,8 +16,13 @@ function LoginPage() {
     setError('');
     setSubmitting(true);
     try {
-      await login({ email, password });
-      navigate(location.state?.from || '/', { replace: true });
+      const user = await login({ email, password });
+      const isAdmin = user.isAdmin === true || user.role === 'admin';
+      const requestedPath = typeof location.state?.from === 'string'
+        ? location.state.from
+        : location.state?.from?.pathname;
+      const customerPath = requestedPath?.startsWith('/admin') ? '/' : (requestedPath || '/');
+      navigate(isAdmin ? '/admin' : customerPath, { replace: true });
     } catch (authError) {
       setError(authError.message);
     } finally {

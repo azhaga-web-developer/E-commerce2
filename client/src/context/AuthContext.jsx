@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { apiUrl } from '../api.js';
 
 const AuthContext = createContext(null);
 const SESSION_KEY = 'yourbrand.auth.session';
@@ -17,7 +18,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     if (!session?.token) return;
-    fetch('/api/auth/me', { headers: { Authorization: `Bearer ${session.token}` } })
+    fetch(apiUrl('/api/auth/me'), { headers: { Authorization: `Bearer ${session.token}` } })
       .then(async (response) => {
         if (!response.ok) throw new Error('Session expired');
         const data = await response.json();
@@ -38,7 +39,7 @@ export function AuthProvider({ children }) {
   };
 
   const authenticate = async (action, values) => {
-    const response = await fetch(`/api/auth/${action}`, {
+    const response = await fetch(apiUrl(`/api/auth/${action}`), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values)

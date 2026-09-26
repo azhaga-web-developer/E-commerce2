@@ -10,7 +10,7 @@ export const protect = async (req, res, next) => {
       return res.status(401).json({ success: false, message: 'Authentication required' });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'development-secret');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.userId).select('-password');
 
     if (!user) {
@@ -25,7 +25,8 @@ export const protect = async (req, res, next) => {
 };
 
 export const authorize = (...roles) => (req, res, next) => {
-  if (!req.user || !roles.includes(req.user.role)) {
+  const adminAccess = roles.includes('admin') && (req.user?.isAdmin === true || req.user?.role === 'admin');
+  if (!req.user || (!adminAccess && !roles.includes(req.user.role))) {
     return res.status(403).json({ success: false, message: 'You do not have permission for this action' });
   }
   return next();

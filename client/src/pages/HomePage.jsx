@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Icon from '../components/Icon.jsx';
+import { useStore } from '../context/StoreContext.jsx';
+import { apiUrl } from '../api.js';
 
 const fallbackPicks = [
   {
@@ -144,6 +146,7 @@ function asStorePrice(product) {
 
 function HomePage() {
   const navigate = useNavigate();
+  const { addToCart, toggleWishlist, isWishlisted } = useStore();
   const [products, setProducts] = useState([]);
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
@@ -151,7 +154,7 @@ function HomePage() {
   const [timer, setTimer] = useState({ hours: 8, minutes: 42, seconds: 19 });
 
   useEffect(() => {
-    fetch('/api/products')
+    fetch(apiUrl('/api/products'))
       .then((res) => res.json())
       .then((data) => setProducts(data.products || []))
       .catch(() => setProducts([]));
@@ -189,7 +192,7 @@ function HomePage() {
         ...pricing
       };
     });
-    return live.length === 4 ? live : fallbackPicks;
+    return live.length === 4 ? live : (import.meta.env.PROD ? live : fallbackPicks);
   }, [products]);
 
   const visiblePicks = [...featured.slice(offset), ...featured.slice(0, offset)].slice(0, 4);
@@ -318,8 +321,8 @@ function HomePage() {
                   <Link to={`/product/${product.id}`} className="relative aspect-[4/5] rounded-lg overflow-hidden bg-surface-container mb-3">
                     <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src={product.image} alt={product.name} />
                     <span className="absolute top-2.5 left-2.5 bg-tertiary-fixed text-on-tertiary-fixed text-label-badge px-2 py-0.5 rounded-full uppercase">{discount}% OFF</span>
-                    <button type="button" aria-label="Add to Wishlist" className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-sm text-on-surface hover:text-error transition-colors flex items-center justify-center shadow-sm" onClick={(event) => event.preventDefault()}>
-                      <Icon name="favorite" className="text-[18px]" />
+                    <button type="button" aria-label={isWishlisted(product) ? 'Remove from Wishlist' : 'Add to Wishlist'} className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-sm text-on-surface hover:text-error transition-colors flex items-center justify-center shadow-sm" onClick={(event) => { event.preventDefault(); event.stopPropagation(); toggleWishlist({ ...product, priceInRupees: true }); }}>
+                      <Icon name="favorite" filled={isWishlisted(product)} className="text-[18px]" />
                     </button>
                   </Link>
                   <div className="flex-1 flex flex-col justify-between">
@@ -337,7 +340,7 @@ function HomePage() {
                         <span className="text-headline-sm text-on-surface">{rupees(product.price)}</span>
                         <span className="text-body-sm text-outline line-through">{rupees(product.originalPrice)}</span>
                       </div>
-                      <button type="button" className="p-2 rounded-lg bg-primary text-on-primary hover:bg-secondary transition-colors flex items-center justify-center" title="Add to Cart" onClick={() => navigate(`/product/${product.id}`)}>
+                      <button type="button" className="p-2 rounded-lg bg-primary text-on-primary hover:bg-secondary transition-colors flex items-center justify-center" title="Add to Cart" onClick={() => addToCart({ ...product, priceInRupees: true })}>
                         <Icon name="shopping_bag" className="text-[18px]" />
                       </button>
                     </div>
