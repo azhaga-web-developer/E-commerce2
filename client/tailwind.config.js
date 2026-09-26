@@ -1,0 +1,105 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,jsx}'],
+  theme: {
+    extend: {
+      colors: {
+        'on-tertiary': '#ffffff',
+        'on-surface': '#0b1c30',
+        'tertiary-fixed-dim': '#ffb599',
+        'inverse-primary': '#bec6e0',
+        'on-tertiary-fixed-variant': '#7f2b00',
+        'outline-variant': '#c6c6cd',
+        'on-secondary-fixed-variant': '#003ea8',
+        'error-container': '#ffdad6',
+        'surface-variant': '#d3e4fe',
+        'primary-fixed-dim': '#bec6e0',
+        'on-error': '#ffffff',
+        tertiary: '#000000',
+        'primary-fixed': '#dae2fd',
+        'on-secondary-container': '#fefcff',
+        'on-tertiary-fixed': '#370e00',
+        'surface-bright': '#f8f9ff',
+        background: '#f8f9ff',
+        'surface-tint': '#565e74',
+        'on-secondary-fixed': '#00174b',
+        'on-primary': '#ffffff',
+        'on-error-container': '#93000a',
+        'on-background': '#0b1c30',
+        'secondary-fixed': '#dbe1ff',
+        'on-primary-fixed-variant': '#3f465c',
+        'surface-container-high': '#dce9ff',
+        error: '#ba1a1a',
+        surface: '#f8f9ff',
+        'inverse-on-surface': '#eaf1ff',
+        'surface-container-highest': '#d3e4fe',
+        'surface-dim': '#cbdbf5',
+        'secondary-container': '#316bf3',
+        'inverse-surface': '#213145',
+        'surface-container-low': '#eff4ff',
+        'on-primary-container': '#7c839b',
+        'on-secondary': '#ffffff',
+        'tertiary-container': '#370e00',
+        'surface-container': '#e5eeff',
+        'tertiary-fixed': '#ffdbce',
+        'surface-container-lowest': '#ffffff',
+        'primary-container': '#131b2e',
+        secondary: '#0051d5',
+        'on-primary-fixed': '#131b2e',
+        primary: '#000000',
+        'secondary-fixed-dim': '#b4c5ff',
+        'on-tertiary-container': '#e45405',
+        outline: '#76777d',
+        'on-surface-variant': '#45464d',
+        admin: {
+          ink: '#111827',
+          muted: '#68768c',
+          line: '#e1e8f2',
+          panel: '#ffffff',
+          canvas: '#f6f8fd',
+          blue: '#145bd0',
+          blueSoft: '#eaf1ff',
+          danger: '#e44d34',
+          dangerSoft: '#fff0eb'
+        }
+      },
+      borderRadius: {
+        DEFAULT: '0.25rem',
+        lg: '0.5rem',
+        xl: '0.75rem',
+        '2xl': '1rem',
+        '3xl': '1.5rem'
+      },
+      spacing: {
+        'gutter-mobile': '0.75rem',
+        'space-sm': '0.5rem',
+        'space-xs': '0.25rem',
+        'space-xl': '2.5rem',
+        margin: '2rem',
+        gutter: '1.5rem',
+        'margin-mobile': '1rem',
+        'space-md': '1rem',
+        'space-lg': '1.5rem'
+      },
+      fontFamily: {
+        sans: ['"Plus Jakarta Sans"', 'Segoe UI', 'sans-serif']
+      },
+      fontSize: {
+        'headline-lg-mobile': ['28px', { lineHeight: '36px', letterSpacing: '-0.02em', fontWeight: '700' }],
+        'body-sm': ['13px', { lineHeight: '20px', fontWeight: '400' }],
+        'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+        display: ['56px', { lineHeight: '64px', letterSpacing: '-0.03em', fontWeight: '800' }],
+        'headline-sm': ['20px', { lineHeight: '28px', letterSpacing: '-0.015em', fontWeight: '600' }],
+        'title-md': ['16px', { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '600' }],
+        'headline-md': ['28px', { lineHeight: '36px', letterSpacing: '-0.02em', fontWeight: '700' }],
+        'label-badge': ['11px', { lineHeight: '14px', letterSpacing: '0.04em', fontWeight: '700' }],
+        'label-md': ['12px', { lineHeight: '16px', letterSpacing: '0.02em', fontWeight: '600' }],
+        'label-lg': ['14px', { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '600' }],
+        'headline-lg': ['40px', { lineHeight: '48px', letterSpacing: '-0.025em', fontWeight: '700' }],
+        'body-md': ['15px', { lineHeight: '24px', fontWeight: '400' }],
+        'display-mobile': ['36px', { lineHeight: '44px', letterSpacing: '-0.025em', fontWeight: '800' }]
+      }
+    }
+  },
+  plugins: []
+};

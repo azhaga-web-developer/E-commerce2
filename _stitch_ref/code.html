@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-tertiary":"#ffffff","on-surface":"#0b1c30","tertiary-fixed-dim":"#ffb599","inverse-primary":"#bec6e0","on-tertiary-fixed-variant":"#7f2b00","outline-variant":"#c6c6cd","on-secondary-fixed-variant":"#003ea8","error-container":"#ffdad6","surface-variant":"#d3e4fe","primary-fixed-dim":"#bec6e0","on-error":"#ffffff","tertiary":"#000000","primary-fixed":"#dae2fd","on-secondary-container":"#fefcff","on-tertiary-fixed":"#370e00","surface-bright":"#f8f9ff","background":"#f8f9ff","surface-tint":"#565e74","on-secondary-fixed":"#00174b","on-primary":"#ffffff","on-error-container":"#93000a","on-background":"#0b1c30","secondary-fixed":"#dbe1ff","on-primary-fixed-variant":"#3f465c","surface-container-high":"#dce9ff","error":"#ba1a1a","surface":"#f8f9ff","inverse-on-surface":"#eaf1ff","surface-container-highest":"#d3e4fe","surface-dim":"#cbdbf5","secondary-container":"#316bf3","inverse-surface":"#213145","surface-container-low":"#eff4ff","on-primary-container":"#7c839b","on-secondary":"#ffffff","tertiary-container":"#370e00","surface-container":"#e5eeff","tertiary-fixed":"#ffdbce","surface-container-lowest":"#ffffff","primary-container":"#131b2e","secondary":"#0051d5","on-primary-fixed":"#131b2e","primary":"#000000","secondary-fixed-dim":"#b4c5ff","on-tertiary-container":"#e45405","outline":"#76777d","on-surface-variant":"#45464d"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter-mobile":"0.75rem","space-sm":"0.5rem","space-xs":"0.25rem","space-xl":"2.5rem","margin":"2rem","gutter":"1.5rem","margin-mobile":"1rem","space-md":"1rem","space-lg":"1.5rem"},"fontFamily":{"headline-lg-mobile":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"display":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"title-md":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"label-badge":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"display-mobile":["Plus Jakarta Sans"]},"fontSize":{"headline-lg-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-sm":["13px",{"lineHeight":"20px","fontWeight":"400"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"display":["56px",{"lineHeight":"64px","letterSpacing":"-0.03em","fontWeight":"800"}],"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.015em","fontWeight":"600"}],"title-md":["16px",{"lineHeight":"24px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-md":["28px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-badge":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"700"}],"headline-lg":["40px",{"lineHeight":"48px","letterSpacing":"-0.025em","fontWeight":"700"}],"body-md":["15px",{"lineHeight":"24px","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"display-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.025em","fontWeight":"800"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased min-h-screen"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-40 flex flex-col justify-between"><div class="bg-primary-container text-on-primary-container text-label-md font-label-md px-margin"><div class="max-w-7xl mx-auto flex items-center justify-between h-9"><div class="flex items-center gap-space-xs text-on-primary"><span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">auto_awesome</span><span class="font-medium">Free shipping on orders above ₹999</span></div><div class="flex items-center gap-space-lg text-on-primary-container"><a class="hover:text-on-primary transition-colors flex items-center gap-1 text-label-md font-label-md" data-path="track-order" href="#"><span class="material-symbols-outlined text-[14px]">local_shipping</span>Track Order</a><span class="text-outline-variant/40">|</span><a class="hover:text-on-primary transition-colors flex items-center gap-1 text-label-md font-label-md" data-path="help-and-faqs" href="#"><span class="material-symbols-outlined text-[14px]">help</span>Help &amp; FAQs</a></div></div></div><div class="px-margin py-space-xs"><div class="max-w-7xl mx-auto flex items-center justify-between gap-space-lg h-16"><div class="flex items-center gap-space-xl"><div class="flex items-center gap-space-xs shrink-0"><img alt="YourBrand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UMvIWPViNxXbZcod7h6dbHsiaxVuAIsouHL8cTnjtf5LY70EpNVBmizjIcPJGa3Ve8k6qVKJ0rA6vChuUqSwY_TZ3a-BA9FdCA_sy0XAUMyHOLWflIgZnWkrolPEKo1RX_zvoPtMx3x4mYtFoTVyCnMVmaRA7HMAyyqHu6K2HqO5suH2P41gX0ZuFRUaP-77ZOlFHUwJv0W2jtw7p3asb_tV30StxWShJ-5tn2sCQ"/><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight hidden sm:inline">YourBrand</span></div><nav class="hidden xl:flex items-center gap-space-md" data-active-classes="text-on-surface font-semibold"><a aria-current="page" class="transition-colors text-on-surface font-semibold" data-path="home" href="#">Home</a><a class="text-on-surface-variant hover:text-on-surface font-title-md text-title-md transition-colors" data-path="shop" href="#">Shop</a><a class="text-on-surface-variant hover:text-on-surface font-title-md text-title-md transition-colors" data-path="categories" href="#">Categories</a><a class="text-on-surface-variant hover:text-on-surface font-title-md text-title-md transition-colors" data-path="new-arrivals" href="#">New Arrivals</a><a class="text-on-surface-variant hover:text-on-surface font-title-md text-title-md transition-colors" data-path="best-sellers" href="#">Best Sellers</a><a class="text-on-surface-variant hover:text-on-surface font-title-md text-title-md transition-colors flex items-center gap-1.5" data-path="offers" href="#">Offers<span class="bg-tertiary-fixed text-on-tertiary-fixed font-label-badge text-label-badge px-2 py-0.5 rounded-full uppercase tracking-wider">HOT</span></a></nav></div><div class="flex-1 max-w-md hidden md:block"><div class="relative flex items-center w-full"><span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[20px] pointer-events-none">search</span><input class="w-full pl-10 pr-4 py-2 bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded-full outline-none focus:ring-2 focus:ring-secondary/20 transition-all" placeholder="Search for products, brands and more..." type="text"/></div></div><div class="flex items-center gap-space-md"><button class="md:hidden p-2 text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined">search</span></button><a class="relative p-2 text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center" data-path="wishlist" href="#"><span class="material-symbols-outlined text-[24px]">favorite</span><span class="absolute -top-0.5 -right-0.5 bg-secondary text-on-secondary font-label-badge text-label-badge w-4 h-4 rounded-full flex items-center justify-center">3</span></a><a class="flex items-center gap-space-xs p-1.5 pl-2.5 rounded-full hover:bg-surface-container transition-colors group" data-path="cart" href="#"><div class="relative"><span class="material-symbols-outlined text-[24px] text-on-surface-variant group-hover:text-on-surface">shopping_bag</span><span class="absolute -top-1 -right-1 bg-secondary text-on-secondary font-label-badge text-label-badge w-4 h-4 rounded-full flex items-center justify-center">2</span></div><div class="hidden sm:flex flex-col text-left pr-1.5"><span class="font-label-badge text-label-badge text-outline">Cart</span><span class="font-label-md text-label-md text-on-surface">₹4,498</span></div></a><div class="h-6 w-[1px] bg-surface-container-high hidden sm:block"></div><a class="flex items-center gap-space-xs pl-1 pr-2 py-1 rounded-full hover:bg-surface-container transition-colors" data-path="my-profile" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAOgJO8Hq9vP4IWJVipOLrmzBMAixk1r3AOOHalMPLNc5ruGP3098pIBVttPjYCF1mc0U3t44OleWXlYo5XuO6NKBGbCawwExRVkfPFYnJXuqPDxLAaXsv9JKxbtbKuNhs8GU0nZntWRViHmxra6c7pmCtDsq-LUg0mTtR7Ib1kW6Cu3K_iyXjjjeqIB3iHdZlkSiiY15imZMYgRftq2_SNiM3da-MQ49lcKh6k1c"/><span class="font-label-lg text-label-lg text-on-surface hidden lg:inline">Arun K.</span><span class="material-symbols-outlined text-[18px] text-on-surface-variant hidden lg:inline">expand_more</span></a></div></div></div><div class="px-margin bg-surface-container-lowest border-t border-surface-container-high"><div class="max-w-7xl mx-auto flex items-center gap-space-lg h-11 overflow-x-auto text-label-lg font-label-lg"><nav class="flex items-center gap-space-lg whitespace-nowrap" data-active-classes="text-secondary font-bold"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="men" href="#">Men</a><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="women" href="#">Women</a><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="electronics" href="#">Electronics</a><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="footwear" href="#">Footwear</a><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="accessories" href="#">Accessories</a><a class="text-on-tertiary-container hover:text-tertiary-container transition-colors flex items-center gap-1 font-bold" data-path="sale" href="#"><span class="material-symbols-outlined text-[16px]">local_fire_department</span>Sale</a></nav></div></div></div></header><main class="w-full pt-40 bg-surface min-h-[calc(100vh-280px)]"><div class="flex flex-col w-full">
+<!-- 1. HERO SECTION -->
+<section class="relative w-full overflow-hidden bg-surface-container-lowest">
+<!-- Subtle architectural radial glow -->
+<div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-secondary-fixed opacity-40 blur-3xl pointer-events-none"></div>
+<div class="absolute top-1/2 -right-40 w-[500px] h-[500px] rounded-full bg-surface-container-high opacity-60 blur-3xl pointer-events-none"></div>
+<div class="max-w-7xl mx-auto px-margin py-space-xl lg:py-24 relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+<!-- Left Editorial Copy Block -->
+<div class="lg:col-span-6 flex flex-col items-start space-y-space-md">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container text-on-surface font-label-badge text-label-badge tracking-wider uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+            NEW SEASON • NEW PICKS
+          </div>
+<h1 class="font-display text-display text-on-surface tracking-tight leading-tight">
+            Find Something You'll Love.
+          </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+            From everyday essentials to products worth showing off, discover a collection made for the way you shop, live and spend.
+          </p>
+<div class="flex flex-wrap items-center gap-space-sm pt-2 w-full sm:w-auto">
+<a class="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg hover:bg-inverse-surface transition-all shadow-md group" data-path="shop" href="#">
+<span>Shop Now</span>
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 group-hover:translate-x-1">arrow_forward</span>
+</a>
+<a class="inline-flex items-center justify-center h-12 px-6 rounded-lg bg-surface-container text-on-surface font-label-lg text-label-lg hover:bg-surface-container-high transition-colors" data-path="new-arrivals" href="#">
+              Explore New Arrivals
+            </a>
+</div>
+<!-- Trust Badge -->
+<div class="flex items-center gap-2 pt-4 text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-secondary text-[20px]">local_shipping</span>
+<span>Free shipping on orders above ₹999</span>
+</div>
+</div>
+<!-- Right Hero Product Composition -->
+<div class="lg:col-span-6 relative mt-6 lg:mt-0">
+<div class="relative w-full aspect-[4/5] max-h-[580px] rounded-xl overflow-hidden shadow-xl bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Modern sculptural white and titanium grey athletic running sneakers suspended dynamically in mid-air against a soft cool-toned architectural studio setting with soft directional sunlight, crisp shadows, ultra sharp detail and premium tactile aesthetics" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoBJa9C_MwgtlKufvQBanqnlWwnmAIXeor-rmgg9A4rKk9q19JxdonELIFF1KezbJQKuQDtL0s-XvaUty4iLF4oZa1DE4MKggk9YJL2XDK-AzyvjFO-1zWjFlfvJZw9X839YciHEol2ToqnRQXgnjE4X0Dy90y3LE0GrM2F_Bx6GAQh4eA9oM2rQb57msNiiP3xfyoOwtT9ro6UCNQ-u-6uD6vRzZxRSHFkTJnkV8"/>
+<!-- Floating Price Pill -->
+<div class="absolute bottom-6 left-6 right-6 sm:right-auto bg-surface-container-lowest/90 backdrop-blur-md px-4 py-3 rounded-xl shadow-lg flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Featured Release</span>
+<span class="font-headline-sm text-headline-sm text-on-surface leading-none">AeroFlex Series • ₹2,499</span>
+</div>
+</div>
+<!-- Rating Tag Top Right -->
+<div class="absolute top-6 right-6 bg-surface-container-lowest/90 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">4.9</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">(2.4k Happy Customers)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. SHOP BY CATEGORY -->
+<section class="w-full py-space-xl max-w-7xl mx-auto px-margin">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-lg gap-4">
+<div class="space-y-1 max-w-xl">
+<span class="font-label-badge text-label-badge uppercase tracking-widest text-secondary font-bold">Curated Catalog</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Shop by Category</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Start with what you're looking for. We've organized our collection so you can get there faster.</p>
+</div>
+<a class="inline-flex items-center gap-1 text-secondary font-label-lg text-label-lg hover:underline underline-offset-4" data-path="categories" href="#">
+<span>View all categories</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+<!-- Asymmetric Category Grid -->
+<div class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-gutter">
+<!-- Men (Large 4 cols) -->
+<a class="group md:col-span-3 lg:col-span-4 bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col" data-path="men" href="#">
+<div class="relative w-full aspect-[4/3] overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Editorial portrait of a man wearing a clean relaxed modern tailored linen jacket and minimal knit t-shirt, standing beside contemporary concrete architectural backdrop in soft morning natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCB5UsKznOoYp32JzCFH1136TZ4ypJ53mVb6U6cUQdOZY1YQDrZncKXPCoc3zbqA6DqgWsp2xeneENfnJ4PNWKZ68blXLKYydPgcRQXDpbVdw6om2zoQ7Ao1K0BLqWJHwkJ9rcKeWyTfNow6WJz8AMUVlp2idadb68QFea5sXQLkE6_ezcA8XC7EZBntFc9KljoIlAttEupDikmsQebfnG1FqL-jJ3k7rIPA4XQb80"/>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Men</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Everyday essentials, timeless styles and everything in between.</p>
+</div>
+<span class="inline-flex items-center gap-1 font-label-lg text-label-lg text-secondary group-hover:translate-x-1 transition-transform">
+            Shop Now →
+          </span>
+</div>
+</a>
+<!-- Women (Large 4 cols) -->
+<a class="group md:col-span-3 lg:col-span-4 bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col" data-path="women" href="#">
+<div class="relative w-full aspect-[4/3] overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="High fashion studio capture of a woman in an elegant drape-cut earth-toned oversized shirt and structured trousers, standing calmly in warm daylight against a clean stone wall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnvTcxBucb-tA9oIzQHrhh1SBEtP7UzrFv2cK60uPsuibUONSFHBjnIsBIV5QVe9RMyl8OofacggCYpK1tqKlxMP5pc2nA9sN0rxrpkqnFZtVFh6xHL4oerT4I_XjBPDUG1a1Y7w2PEwLwU8hkfmsacLVgYZMYYrTnzrzzc9_WcUKfwxRhCTfzpOUrbpT4o-aqmLuDQoHh_z8BUMXV-9DEKdEcSN-yaDT3ovkb6eg"/>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Women</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">New looks, everyday favourites and pieces made to stand out.</p>
+</div>
+<span class="inline-flex items-center gap-1 font-label-lg text-label-lg text-secondary group-hover:translate-x-1 transition-transform">
+            Shop Now →
+          </span>
+</div>
+</a>
+<!-- Electronics (Large 4 cols) -->
+<a class="group md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col" data-path="electronics" href="#">
+<div class="relative w-full aspect-[4/3] overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Sleek minimalist matte black and silver wireless earbuds in open magnetic case alongside a premium smartphone on an ash wood desk with soft ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXyysjCGTeHu0lQji48gg7FkPHG2W4IgrkoXH6qFnYuihhngWVpsPVEOZPaW2oWS0jx64y7TE8ZDgPycLpIsKqM8Esi1p4IeAyNR58RBVq1zJ0yNNTDVtubkLaEbLkVIGNmqRvZWj26hNr4zEkEmU90DBrvd7xxwhTnvbeZ6QmiAP28fFh3pvQccj0q8v2qK6vHS_s8e_p7yBX6fKSXrkDm_aVbedKsKuRrkE_tcc"/>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Electronics</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Smart gadgets and useful tech for everyday life.</p>
+</div>
+<span class="inline-flex items-center gap-1 font-label-lg text-label-lg text-secondary group-hover:translate-x-1 transition-transform">
+            Shop Now →
+          </span>
+</div>
+</a>
+<!-- Footwear (Wide 6 cols) -->
+<a class="group md:col-span-3 lg:col-span-6 bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col sm:flex-row" data-path="footwear" href="#">
+<div class="relative w-full sm:w-1/2 aspect-square sm:aspect-auto overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Premium crafted leather minimalist derby shoes resting beside a high-performance running shoe on a sculpted stone podium with subtle shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqob_ev5h8T_nNzSznq2bm-lSOrpkM-O0K6bn32u82cqPYr2ztp_Dq91EC3J83vAeRO4FjsW2en7986wvr51DqAxRoaBAH0tjU6v_sFIPbATvclf1rQH0BgLxDCEiVhtCHrmypzxSA2ClDjrghZDWv0h1gF7yUgP6eKO-ZEpWEGuDlI91LhSIMH3PM7neeK_yLPHVbkHlETMIwTgjvIf9qGCDcYQ2IuWKoZzf-pJw"/>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between space-y-3 sm:w-1/2">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Footwear</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Find your next favourite pair, from everyday sneakers to something a little sharper.</p>
+</div>
+<span class="inline-flex items-center gap-1 font-label-lg text-label-lg text-secondary group-hover:translate-x-1 transition-transform">
+            Shop Now →
+          </span>
+</div>
+</a>
+<!-- Accessories (Wide 6 cols) -->
+<a class="group md:col-span-3 lg:col-span-6 bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col sm:flex-row" data-path="accessories" href="#">
+<div class="relative w-full sm:w-1/2 aspect-square sm:aspect-auto overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Flat lay arrangement of minimal vegetable-tanned leather bi-fold wallet, titanium frame sunglasses, and sleek woven wrist strap on natural beige paper background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9QqFRsUQvilSw8wwypgRTmTUBK5E0vCiHsDF2Wy14Py3pQJYJ4TdNbtX8Ng_gDEpyVCjC0KWaObIiBCmChqgC28WolyGRFZNhJHFXToE-21TzL6NZPSN6FiTc7dWPzJw8WjMFk0zGQ3vhSXeK-Ts4kctCP3rTGdmWTCiTIKfrHsP_pJxSOSWAyUa9zAMsCNmBYAckETJAUGs27ADd5TeuBiLG5272h1ga0zor1Wk"/>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between space-y-3 sm:w-1/2">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Accessories</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">The finishing touches that make an outfit your own.</p>
+</div>
+<span class="inline-flex items-center gap-1 font-label-lg text-label-lg text-secondary group-hover:translate-x-1 transition-transform">
+            Shop Now →
+          </span>
+</div>
+</a>
+</div>
+</section>
+<!-- 3. FEATURED PICKS (PRODUCT GRID) -->
+<section class="w-full py-space-xl bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-margin">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-lg gap-3">
+<div class="space-y-1">
+<span class="font-label-badge text-label-badge uppercase tracking-widest text-on-tertiary-container font-bold">Staff Selected</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Featured Picks</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">A few products we're particularly excited about right now.</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full bg-surface-container-lowest text-on-surface hover:bg-surface-container flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[20px]">west</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-surface-container-lowest text-on-surface hover:bg-surface-container flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[20px]">east</span>
+</button>
+</div>
+</div>
+<!-- 4 Column Product Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Product Card 1 -->
+<div class="group bg-surface-container-lowest rounded-xl p-3 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+<div class="relative aspect-[4/5] rounded-lg overflow-hidden bg-surface-container mb-3">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Lightweight running shoes in breathable aerodynamic mesh with cushioned foam sole photographed on clean pale grey pedestal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl-e9N6gllfqvm9mb5qEig72Hn56wq3vkzmW8nAn4z8AcPVzbUohAwEGOUjvwRNnziAVi3GmZ4lSRSJHLeKUi2xrqSLVSkMGold-Avrq4t2BNvnJOGxikns69DRKZbo8WTtHXX1ByqDzrLCNuHLHjamQHKnYxHGJtqm_eXz-CILJsDt-lUHy8wNLstCXntVhcWd0BljZv-JJhAZ37HQJTyxH_-1ihZA35D4OzmE3A"/>
+<span class="absolute top-2.5 left-2.5 bg-tertiary-fixed text-on-tertiary-fixed font-label-badge text-label-badge px-2 py-0.5 rounded-full uppercase">
+              29% OFF
+            </span>
+<button aria-label="Add to Wishlist" class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-sm text-on-surface hover:text-error transition-colors flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-1 mb-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md text-on-surface">4.7</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">· 128 reviews</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface group-hover:text-secondary transition-colors">AeroFlex Running Shoes</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Lightweight everyday running shoes designed for comfort.</p>
+</div>
+<div class="pt-3 mt-3 flex items-center justify-between border-t-0">
+<div class="flex items-baseline gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">₹2,499</span>
+<span class="font-body-sm text-body-sm text-outline line-through">₹3,499</span>
+</div>
+<button class="p-2 rounded-lg bg-primary text-on-primary hover:bg-secondary transition-colors flex items-center justify-center" title="Add to Cart">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group bg-surface-container-lowest rounded-xl p-3 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+<div class="relative aspect-[4/5] rounded-lg overflow-hidden bg-surface-container mb-3">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Nomad oxford cotton button-down shirt neatly folded on minimal timber table with soft natural textile texture and crisp collar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgFz7fWB9iUn94Kyw8p98soVLxPdYQyZfssRc8ICRTPZmYvTxM5RADpNr_7sNlE2WirGPQwJxFpmO-xG4ll6OtgWKouv0616I93s6ijU-oqdxPBG3wjM4Vr5_xPGiU4fNqgo8BGWrMX2K7o1nd4dPHKI8J1WwfPkiBGqBXcX2bhX7fCPJ0RrVIK7l0_6HSTXXGgpjsbHITYeB0kFgX3fmuSw6Cazly0BiZsmheBtY"/>
+<span class="absolute top-2.5 left-2.5 bg-tertiary-fixed text-on-tertiary-fixed font-label-badge text-label-badge px-2 py-0.5 rounded-full uppercase">
+              28% OFF
+            </span>
+<button aria-label="Add to Wishlist" class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-sm text-on-surface hover:text-error transition-colors flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-1 mb-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md text-on-surface">4.8</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">· 84 reviews</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface group-hover:text-secondary transition-colors">Nomad Oxford Cotton Shirt</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Crisp breathable fit tailored for work and weekend.</p>
+</div>
+<div class="pt-3 mt-3 flex items-center justify-between">
+<div class="flex items-baseline gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">₹1,799</span>
+<span class="font-body-sm text-body-sm text-outline line-through">₹2,499</span>
+</div>
+<button class="p-2 rounded-lg bg-primary text-on-primary hover:bg-secondary transition-colors flex items-center justify-center" title="Add to Cart">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group bg-surface-container-lowest rounded-xl p-3 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+<div class="relative aspect-[4/5] rounded-lg overflow-hidden bg-surface-container mb-3">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Matte midnight blue premium over-ear active noise cancelling headphones with memory foam cushions on modern matte display block" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFw2XhrT2WudKI8CFA_ja9auvsrWUT7iLfsLZDKcxwZjdi6UQxBIRxejo6Zmj1iwbCYgfiLIxUybiVUwDdmxv1dw2po4Tc2oJBLOVNFMtSaFZ94IxKy1oKrCAGIND63PGzp-xOiy6u5Jq8besqnvKXaF3TKjxyuvYxUSApDbNwTEmcIy6muuS932jH73ZQFZZDZgme435WQc6dHn73I8o7JfdC2bGHZjGk0fnsUhg"/>
+<span class="absolute top-2.5 left-2.5 bg-tertiary-fixed text-on-tertiary-fixed font-label-badge text-label-badge px-2 py-0.5 rounded-full uppercase">
+              37% OFF
+            </span>
+<button aria-label="Add to Wishlist" class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-sm text-on-surface hover:text-error transition-colors flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-1 mb-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md text-on-surface">4.9</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">· 310 reviews</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface group-hover:text-secondary transition-colors">Aura ANC Wireless Headphones</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Active noise cancellation with 40-hour battery life.</p>
+</div>
+<div class="pt-3 mt-3 flex items-center justify-between">
+<div class="flex items-baseline gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">₹4,999</span>
+<span class="font-body-sm text-body-sm text-outline line-through">₹7,999</span>
+</div>
+<button class="p-2 rounded-lg bg-primary text-on-primary hover:bg-secondary transition-colors flex items-center justify-center" title="Add to Cart">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group bg-surface-container-lowest rounded-xl p-3 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+<div class="relative aspect-[4/5] rounded-lg overflow-hidden bg-surface-container mb-3">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Minimalist chronograph wristwatch with brushed steel dial, genuine saddle brown leather strap on slate stone backdrop with warm rim lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyMEpGwn3jkhJc5YRvAP5q4MTvzv4E9fWdDxFrDzffQ8ZhVVX-6p4lA6qidYzpwRxaKiKKFLeZUvvagu_bwuhE74F1LxwzdAVbevnU4XgqOXFjpa4vVUEhnvUVvbBHdn4OSuK9PWwvgZQTFKKr6CI-Di1BoliACgVFaBCfr-bBoni_5Jl-PIEXXJzwQtxF5mAHc0TkaYSpgZRC9C5wHusYfz-z2pji4ZqBKIS8swQ"/>
+<span class="absolute top-2.5 left-2.5 bg-tertiary-fixed text-on-tertiary-fixed font-label-badge text-label-badge px-2 py-0.5 rounded-full uppercase">
+              26% OFF
+            </span>
+<button aria-label="Add to Wishlist" class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-sm text-on-surface hover:text-error transition-colors flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-1 mb-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md text-on-surface">4.6</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">· 95 reviews</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface group-hover:text-secondary transition-colors">Classic Minimalist Leather Chrono</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Sleek water-resistant everyday timepiece.</p>
+</div>
+<div class="pt-3 mt-3 flex items-center justify-between">
+<div class="flex items-baseline gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">₹3,299</span>
+<span class="font-body-sm text-body-sm text-outline line-through">₹4,500</span>
+</div>
+<button class="p-2 rounded-lg bg-primary text-on-primary hover:bg-secondary transition-colors flex items-center justify-center" title="Add to Cart">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. FLASH SALE SECTION -->
+<section class="w-full py-space-xl max-w-7xl mx-auto px-margin">
+<div class="bg-primary-container text-on-primary rounded-xl p-6 lg:p-12 shadow-xl relative overflow-hidden">
+<!-- Ambient background decoration -->
+<div class="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-secondary opacity-20 blur-3xl pointer-events-none"></div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center relative z-10">
+<!-- Flash Timer & Content -->
+<div class="lg:col-span-5 flex flex-col items-start space-y-space-md">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-container text-on-tertiary-container font-label-badge text-label-badge font-bold uppercase">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+            LIMITED TIME
+          </div>
+<h2 class="font-headline-lg text-headline-lg text-on-primary leading-tight">
+            Good Deals Don't Wait.
+          </h2>
+<p class="font-body-md text-body-md text-on-primary-container max-w-md">
+            Save on selected products while the offer lasts. Once the timer hits zero, these prices are gone.
+          </p>
+<!-- Live Countdown Blocks -->
+<div class="flex items-center gap-3 py-2">
+<div class="flex flex-col items-center justify-center w-16 h-16 rounded-lg bg-inverse-surface shadow-inner">
+<span class="font-headline-md text-headline-md text-on-primary font-bold" id="hours-block">08</span>
+<span class="font-label-badge text-label-badge text-on-primary-container uppercase">Hours</span>
+</div>
+<span class="text-on-primary-container font-headline-md text-headline-md">:</span>
+<div class="flex flex-col items-center justify-center w-16 h-16 rounded-lg bg-inverse-surface shadow-inner">
+<span class="font-headline-md text-headline-md text-on-primary font-bold" id="mins-block">42</span>
+<span class="font-label-badge text-label-badge text-on-primary-container uppercase">Minutes</span>
+</div>
+<span class="text-on-primary-container font-headline-md text-headline-md">:</span>
+<div class="flex flex-col items-center justify-center w-16 h-16 rounded-lg bg-inverse-surface shadow-inner">
+<span class="font-headline-md text-headline-md text-on-tertiary-fixed-dim font-bold" id="secs-block">19</span>
+<span class="font-label-badge text-label-badge text-on-primary-container uppercase">Seconds</span>
+</div>
+</div>
+<a class="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-lg bg-secondary text-on-secondary font-label-lg text-label-lg hover:bg-secondary-container transition-colors shadow-md" data-path="sale" href="#">
+<span>Shop the Sale</span>
+<span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+</a>
+</div>
+<!-- Beside it: 2 Deal Cards -->
+<div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-gutter mt-6 lg:mt-0">
+<!-- Deal Card 1 -->
+<div class="bg-surface-container-lowest text-on-surface rounded-xl p-4 shadow-lg flex flex-col justify-between">
+<div>
+<div class="relative aspect-square rounded-lg overflow-hidden bg-surface-container mb-3">
+<img class="w-full h-full object-cover" data-alt="Ultralight matte black smart fitness tracking band with color OLED display and high-grade silicone strap resting on structured granite surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHfwrkTRSrokwYkBR5WFtTyM-7CdC4O_a4eAtnpeBRM0aeEdkQv2ZNMP8L8cfHIo21suxMXK3UNt3dPAcxnLIaDY-_oORfbzcFEYvtbXQk0yrRegIyTSftyWgsf8YSUERqB0N-G-WkM6ZUVoNwBZLTA0NBN0tv4xXYZ_cREWpVckC1bVbZNA88Tlq6INeSaNfUJzMmuwsZaVBNBtFlzz8bTHtQJ7vU4ZfjaF0FuRg"/>
+<span class="absolute top-2 left-2 bg-tertiary-fixed text-on-tertiary-fixed font-label-badge text-label-badge px-2 py-0.5 rounded-full font-bold">
+                  45% OFF
+                </span>
+</div>
+<h4 class="font-title-md text-title-md text-on-surface">PulsePro Smart Band</h4>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-headline-sm text-headline-sm text-on-surface">₹1,649</span>
+<span class="font-body-sm text-body-sm text-outline line-through">₹2,999</span>
+</div>
+</div>
+<!-- Stock Progress Bar -->
+<div class="mt-4 pt-3 space-y-1.5">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="text-error font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                  Only 4 left at this price!
+                </span>
+<span class="text-on-surface-variant font-medium">82% Claimed</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-error rounded-full transition-all duration-500" style="width: 82%;"></div>
+</div>
+</div>
+</div>
+<!-- Deal Card 2 -->
+<div class="bg-surface-container-lowest text-on-surface rounded-xl p-4 shadow-lg flex flex-col justify-between">
+<div>
+<div class="relative aspect-square rounded-lg overflow-hidden bg-surface-container mb-3">
+<img class="w-full h-full object-cover" data-alt="Heavyweight french terry charcoal pullover hoodie folded with clean aesthetic on light oak surface with warm backlighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgfNqDSeUVd6xwSOepk6u1uq2z9hNWDqVwR6L27VpcjYzb74jS1IrguqIbZcdwox9NaU018EenMmpFz47PUc3GOj9DoKkHwE0_JJ8iVqNnUxbs1i_Afn44DtKnC5LwycQMw7iUF1aicUhKN-58wOL1RFPMhkHg6DFF-fh-w1qXU6yRq2UOHJakzY2rCCBcxony103QMsRPMOEdE23QdFncV4YPhsGE858DDfoLXks"/>
+<span class="absolute top-2 left-2 bg-tertiary-fixed text-on-tertiary-fixed font-label-badge text-label-badge px-2 py-0.5 rounded-full font-bold">
+                  50% OFF
+                </span>
+</div>
+<h4 class="font-title-md text-title-md text-on-surface">Everyday Heavy Hoodie</h4>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-headline-sm text-headline-sm text-on-surface">₹1,499</span>
+<span class="font-body-sm text-body-sm text-outline line-through">₹2,999</span>
+</div>
+</div>
+<!-- Stock Progress Bar -->
+<div class="mt-4 pt-3 space-y-1.5">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="text-error font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                  Only 2 left at this price!
+                </span>
+<span class="text-on-surface-variant font-medium">92% Claimed</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-error rounded-full transition-all duration-500" style="width: 92%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. WHY SHOP WITH US -->
+<section class="w-full py-space-xl bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto px-margin">
+<div class="text-center max-w-2xl mx-auto mb-space-xl space-y-2">
+<span class="font-label-badge text-label-badge uppercase tracking-widest text-secondary font-bold">The Brand Promise</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Shopping Without the Headache</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">We keep the important things simple — good products, straightforward pricing and an experience that doesn't get in your way.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Feature 1 -->
+<div class="p-space-lg rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col space-y-space-sm">
+<div class="w-12 h-12 rounded-xl bg-surface-container-lowest text-secondary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[26px]">local_shipping</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Free Shipping</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Get free delivery on orders above ₹999.</p>
+</div>
+<!-- Feature 2 -->
+<div class="p-space-lg rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col space-y-space-sm">
+<div class="w-12 h-12 rounded-xl bg-surface-container-lowest text-secondary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[26px]">format_image_left</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Secure Payments</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Pay safely using trusted payment methods.</p>
+</div>
+<!-- Feature 3 -->
+<div class="p-space-lg rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col space-y-space-sm">
+<div class="w-12 h-12 rounded-xl bg-surface-container-lowest text-secondary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[26px]">autorenew</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Easy Returns</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Changed your mind? Return eligible products within 7 days.</p>
+</div>
+<!-- Feature 4 -->
+<div class="p-space-lg rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col space-y-space-sm">
+<div class="w-12 h-12 rounded-xl bg-surface-container-lowest text-secondary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[26px]">support_agent</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Customer Support</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Have a question about an order or product? Our support team is ready to help.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. CUSTOMER REVIEWS -->
+<section class="w-full py-space-xl bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-margin">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-lg gap-2">
+<div>
+<span class="font-label-badge text-label-badge uppercase tracking-widest text-secondary font-bold">Community Voice</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">What Our Customers Say</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Real feedback from people who've shopped with us.</p>
+</div>
+<div class="flex items-center gap-1 text-on-surface font-label-md text-label-md">
+<span class="font-bold">4.8 / 5.0</span>
+<span class="text-on-surface-variant">across 12,000+ verified ratings</span>
+</div>
+</div>
+<!-- 3 Testimonials -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Review 1 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between space-y-4">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex text-tertiary-fixed-dim">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="inline-flex items-center gap-1 font-label-badge text-label-badge text-secondary bg-surface-container px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+                Verified Purchase
+              </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+              “Exactly what I was looking for. The product looked just like the pictures, arrived on time and the quality was better than I expected.”
+            </p>
+</div>
+<div class="pt-3 border-t-0 flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-label-lg text-label-lg font-bold">
+              PS
+            </div>
+<div>
+<p class="font-title-md text-title-md text-on-surface">Priya S.</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Bengaluru</p>
+</div>
+</div>
+</div>
+<!-- Review 2 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between space-y-4">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex text-tertiary-fixed-dim">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="inline-flex items-center gap-1 font-label-badge text-label-badge text-secondary bg-surface-container px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+                Verified Purchase
+              </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+              “Really happy with the purchase. The ordering process was simple and delivery was quick. I'll definitely be checking out the new arrivals.”
+            </p>
+</div>
+<div class="pt-3 border-t-0 flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center font-label-lg text-label-lg font-bold">
+              AK
+            </div>
+<div>
+<p class="font-title-md text-title-md text-on-surface">Arun K.</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Mumbai</p>
+</div>
+</div>
+</div>
+<!-- Review 3 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between space-y-4">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex text-tertiary-fixed-dim">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="inline-flex items-center gap-1 font-label-badge text-label-badge text-secondary bg-surface-container px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+                Verified Purchase
+              </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+              “Good quality without the crazy price. I've ordered a few times now and haven't had a bad experience yet.”
+            </p>
+</div>
+<div class="pt-3 border-t-0 flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-label-lg text-label-lg font-bold">
+              RM
+            </div>
+<div>
+<p class="font-title-md text-title-md text-on-surface">Rahul M.</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Delhi NCR</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. NEWSLETTER SECTION -->
+<section class="w-full py-space-xl max-w-7xl mx-auto px-margin">
+<div class="bg-surface-container-lowest rounded-xl p-8 sm:p-12 lg:p-16 shadow-md text-center flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-secondary/10 text-secondary flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-[24px]">mark_email_read</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface max-w-xl">
+        Don't Miss What's New
+      </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mt-2 mb-space-md">
+        Get new arrivals, special offers and the occasional good reason to come back.
+      </p>
+<form class="w-full max-w-md flex flex-col sm:flex-row gap-2" onsubmit="event.preventDefault(); document.getElementById('newsletter-success').classList.remove('hidden');">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">mail</span>
+<input class="w-full pl-11 pr-4 py-3 bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded-lg outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary/20 transition-all" placeholder="Enter your email address" required="" type="email"/>
+</div>
+<button class="h-12 px-8 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg hover:bg-secondary transition-colors whitespace-nowrap shadow-sm" type="submit">
+          Subscribe
+        </button>
+</form>
+<p class="hidden mt-3 text-secondary font-label-md text-label-md" id="newsletter-success">
+        ✓ Thank you for subscribing! Welcome to YourBrand.
+      </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant/80 mt-space-sm">
+        No unnecessary emails. Unsubscribe anytime.
+      </p>
+</div>
+</section>
+</div>
+<script>
+  // Simple Countdown Timer simulation for Flash Sale
+  (function initFlashSaleTimer() {
+    let hours = 8;
+    let minutes = 42;
+    let seconds = 19;
+
+    const hoursEl = document.getElementById('hours-block');
+    const minsEl = document.getElementById('mins-block');
+    const secsEl = document.getElementById('secs-block');
+
+    if (!hoursEl || !minsEl || !secsEl) return;
+
+    setInterval(() => {
+      if (seconds > 0) {
+        seconds--;
+      } else {
+        seconds = 59;
+        if (minutes > 0) {
+          minutes--;
+        } else {
+          minutes = 59;
+          if (hours > 0) {
+            hours--;
+          } else {
+            hours = 12; // loop for demo aesthetic
+          }
+        }
+      }
+
+      hoursEl.textContent = String(hours).padStart(2, '0');
+      minsEl.textContent = String(minutes).padStart(2, '0');
+      secsEl.textContent = String(seconds).padStart(2, '0');
+    }, 1000);
+  })();
+</script></main><footer class="w-full bg-surface-container-low text-on-surface-variant border-t border-surface-container-high"><div class="max-w-7xl mx-auto px-margin pt-space-xl pb-space-lg"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-gutter"><div class="lg:col-span-1 space-y-space-md"><div class="flex items-center gap-space-xs"><img alt="YourBrand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UMvIWPViNxXbZcod7h6dbHsiaxVuAIsouHL8cTnjtf5LY70EpNVBmizjIcPJGa3Ve8k6qVKJ0rA6vChuUqSwY_TZ3a-BA9FdCA_sy0XAUMyHOLWflIgZnWkrolPEKo1RX_zvoPtMx3x4mYtFoTVyCnMVmaRA7HMAyyqHu6K2HqO5suH2P41gX0ZuFRUaP-77ZOlFHUwJv0W2jtw7p3asb_tV30StxWShJ-5tn2sCQ"/><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">YourBrand</span></div><p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">Good products. Fair prices. Simple shopping.</p><div class="flex items-center gap-space-sm pt-space-xs"><a aria-label="Community" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary-container hover:text-on-primary transition-colors" href="#"><span class="material-symbols-outlined text-[18px]">public</span></a><a aria-label="Chat" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary-container hover:text-on-primary transition-colors" href="#"><span class="material-symbols-outlined text-[18px]">chat</span></a><a aria-label="Share" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary-container hover:text-on-primary transition-colors" href="#"><span class="material-symbols-outlined text-[18px]">share</span></a></div><div class="space-y-space-xs pt-space-sm text-label-md font-label-md text-on-surface"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-secondary">verified_user</span><span>100% Genuine</span></div><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-secondary">published_with_changes</span><span>Easy 7-Day Returns</span></div><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-secondary">lock</span><span>Encrypted Payment</span></div></div></div><div><h4 class="font-title-md text-title-md text-on-surface mb-space-md">Shop</h4><ul class="space-y-space-xs font-body-sm text-body-sm"><li class="py-1"><a class="hover:text-on-surface transition-colors" data-path="shop" href="#">All Products</a></li><li class="py-1"><a class="hover:text-on-surface transition-colors" data-path="new-arrivals" href="#">New Arrivals</a></li><li class="py-1"><a class="hover:text-on-surface transition-colors" data-path="best-sellers" href="#">Best Sellers</a></li><li class="py-1"><a class="hover:text-on-surface transition-colors" data-path="offers" href="#">Offers</a></li><li class="py-1"><a class="hover:text-on-surface transition-colors" data-path="categories" href="#">Categories</a></li></ul></div><div><h4 class="font-title-md text-title-md text-on-surface mb-space-md">Customer Support</h4><ul class="space-y-space-xs font-body-sm text-body-sm"><li class="py-1"><a class="hover:text-on-surface transition-colors" data-path="contact-us" href="#">Contact Us</a></li><li class="py-1"><a class="hover:text-on-surface transition-colors" data-path="help-and-faqs" href="#">FAQs</a></li><li class="py-1"><a class="hover:text-on-surface transition-colors" data-path="shipping-and-delivery" href="#">Shipping &amp; Delivery</a></li><li class="py-1"><a class="hover:text-on-surface transition-colors" data-path="returns-and-refunds" href="#">Returns &amp; Refunds</a></li><li class="py-1"><a class="hover:text-on-surface transition-colors" data-path="track-order" href="#">Track Order</a></li></ul></div><div><h4 class="font-title-md text-title-md text-on-surface mb-space-md">Account</h4><ul class="space-y-space-xs font-body-sm text-body-sm"><li class="py-1"><a class="hover:text-on-surface transition-colors" data-path="my-profile" href="#">My Profile</a></li><li class="py-1"><a class="hover:text-on-surface transition-colors" data-path="my-orders" href="#">My Orders</a></li><li class="py-1"><a class="hover:text-on-surface transition-colors" data-path="wishlist" href="#">Wishlist</a></li><li class="py-1"><a class="hover:text-on-surface transition-colors" data-path="addresses" href="#">Addresses</a></li></ul></div><div><h4 class="font-title-md text-title-md text-on-surface mb-space-md">Company</h4><ul class="space-y-space-xs font-body-sm text-body-sm"><li class="py-1"><a class="hover:text-on-surface transition-colors" data-path="about-us" href="#">About Us</a></li><li class="py-1"><a class="hover:text-on-surface transition-colors" data-path="contact-us" href="#">Contact</a></li><li class="py-1"><a class="hover:text-on-surface transition-colors" data-path="privacy-policy" href="#">Privacy Policy</a></li><li class="py-1"><a class="hover:text-on-surface transition-colors" data-path="terms-and-conditions" href="#">Terms &amp; Conditions</a></li></ul></div></div><div class="mt-space-xl pt-space-md border-t border-surface-container-high flex flex-col md:flex-row items-center justify-between gap-space-md font-body-sm text-body-sm"><p>© 2026 YourBrand. All rights reserved.</p><div class="flex items-center gap-space-sm flex-wrap"><span class="px-2 py-0.5 rounded bg-surface-container text-on-surface text-label-md font-label-md">Visa</span><span class="px-2 py-0.5 rounded bg-surface-container text-on-surface text-label-md font-label-md">Mastercard</span><span class="px-2 py-0.5 rounded bg-surface-container text-on-surface text-label-md font-label-md">UPI</span><span class="px-2 py-0.5 rounded bg-surface-container text-on-surface text-label-md font-label-md">RuPay</span><span class="px-2 py-0.5 rounded bg-surface-container text-on-surface text-label-md font-label-md">Net Banking</span></div></div></div></footer></body></html>
