@@ -52,8 +52,8 @@ function Footer() {
         <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-gutter ${isAuthPage ? 'lg:grid-cols-1' : ''}`}>
           <div className="lg:col-span-1 space-y-space-md">
             <Link to="/" className="flex items-center gap-space-xs">
-              <span className="h-8 w-8 rounded-lg bg-primary-container text-on-primary grid place-items-center font-extrabold">Y</span>
-              <span className="text-headline-sm text-on-surface tracking-tight">YourBrand</span>
+              <span className="h-8 w-8 rounded-lg bg-primary-container text-on-primary grid place-items-center font-extrabold">C</span>
+              <span className="text-headline-sm text-on-surface tracking-tight">Cartivo</span>
             </Link>
             <p className="text-body-sm leading-relaxed">Good products. Fair prices. Simple shopping.</p>
             <div className="flex items-center gap-space-sm pt-space-xs">
@@ -85,7 +85,7 @@ function Footer() {
         </div>
 
         <div className="mt-space-xl pt-space-md border-t border-surface-container-high flex flex-col md:flex-row items-center justify-between gap-space-md text-body-sm">
-          <p>© 2026 YourBrand. All rights reserved.</p>
+          <p>© 2026 Cartivo. All rights reserved.</p>
           <div className="flex items-center gap-space-sm flex-wrap">
             {['Visa', 'Mastercard', 'UPI', 'RuPay', 'Net Banking'].map((method) => (
               <span key={method} className="px-2 py-0.5 rounded bg-surface-container text-on-surface text-label-md">{method}</span>

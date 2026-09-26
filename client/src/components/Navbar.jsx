@@ -61,8 +61,8 @@ function Navbar() {
           <div className="max-w-7xl mx-auto flex items-center justify-between gap-space-lg h-16">
             <div className="flex items-center gap-space-xl min-w-0">
               <Link to="/" className="flex items-center gap-space-xs shrink-0">
-                <span className="h-8 w-8 rounded-lg bg-primary-container text-on-primary grid place-items-center font-extrabold">Y</span>
-                <span className="text-headline-sm text-on-surface tracking-tight hidden sm:inline">YourBrand</span>
+                <span className="h-8 w-8 rounded-lg bg-primary-container text-on-primary grid place-items-center font-extrabold">C</span>
+                <span className="text-headline-sm text-on-surface tracking-tight hidden sm:inline">Cartivo</span>
               </Link>
               <nav className="hidden xl:flex items-center gap-space-md">
                 {mainLinks.map((link) => (

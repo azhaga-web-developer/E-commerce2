@@ -1,8 +1,8 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 
 const StoreContext = createContext(null);
-const CART_KEY = 'yourbrand.store.cart';
-const WISHLIST_KEY = 'yourbrand.store.wishlist';
+const CART_KEY = 'cartivo.store.cart';
+const WISHLIST_KEY = 'cartivo.store.wishlist';
 
 function readItems(key) {
   try { return JSON.parse(localStorage.getItem(key) || '[]'); }

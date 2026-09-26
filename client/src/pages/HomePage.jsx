@@ -518,7 +518,7 @@ function HomePage() {
               Subscribe
             </button>
           </form>
-          {subscribed && <p className="mt-3 text-secondary text-label-md">✓ Thank you for subscribing! Welcome to YourBrand.</p>}
+          {subscribed && <p className="mt-3 text-secondary text-label-md">✓ Thank you for subscribing! Welcome to Cartivo.</p>}
           <p className="text-body-sm text-on-surface-variant/80 mt-space-sm">No unnecessary emails. Unsubscribe anytime.</p>
         </div>
       </section>

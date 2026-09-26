@@ -1,4 +1,4 @@
-# YourBrand E-commerce
+# Cartivo E-commerce
 
 A MERN storefront and admin dashboard built with React, Vite, Express, and MongoDB.
 

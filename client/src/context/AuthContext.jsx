@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { apiUrl } from '../api.js';
 
 const AuthContext = createContext(null);
-const SESSION_KEY = 'yourbrand.auth.session';
+const SESSION_KEY = 'cartivo.auth.session';
 
 function readStoredSession() {
   try {
